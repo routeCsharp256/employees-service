@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace EmployeesService.ApplicationServices.Models.Commands.Employees
+namespace EmployeesService.ApplicationServices.Models.Commands
 {
     public class CreateEmployeeCommand : IRequest<long>
     {

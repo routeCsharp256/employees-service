@@ -5,8 +5,8 @@ namespace EmployeesService.DataAccess.DbContexts
 {
     public class EmployeesDbContext : DbContext
     {
-        public DbSet<EmployeeDto> Employees { get; set; }
-        public DbSet<ConferenceDto> Conferences { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Conference> Conferences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

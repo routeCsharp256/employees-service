@@ -1,7 +1,11 @@
-﻿namespace EmployeesService.Hosting.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace EmployeesService.Hosting.Controllers
 {
-    public class ConferenceController
+    [ApiController]
+    [Route("api/[controller]/[action]")]
+    public class ConferenceController : Controller
     {
-        
+
     }
 }

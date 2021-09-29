@@ -11,6 +11,14 @@ namespace EmployeesService.Core.Contracts.Repositories
         where TKey : IEquatable<TKey>
     {
         /// <summary>
+        /// Create new entry in store
+        /// </summary>
+        /// <param name="entity">Entry to add</param>
+        /// <param name="cancellationToken">Token for cancellation operation.</param>
+        /// <returns>New identifier of entry</returns>
+        Task<TKey> CreateAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get all entities
         /// </summary>
         /// <param name="cancellationToken">Token for cancellation operation.</param>

@@ -8,19 +8,19 @@ using EmployeesService.DataAccess.DbContexts;
 
 namespace EmployeesService.DataAccess.Repositories
 {
-    public class EmployeeRepository : BaseRepository<EmployeeDto, long>, IEmployeeRepository
+    public class EmployeeRepository : BaseRepository<Employee, long>, IEmployeeRepository
     {
         public EmployeeRepository(EmployeesDbContext dbContext) : base(dbContext)
         {
-            
+
         }
 
-        public override Task<List<EmployeeDto>> GetAllAsync(CancellationToken cancellationToken = default)
+        public override Task<List<Employee>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<List<EmployeeDto>> GetByIdsAsync(IReadOnlyCollection<long> ids, CancellationToken cancellationToken = default)
+        public override Task<List<Employee>> GetByIdsAsync(IReadOnlyCollection<long> ids, CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

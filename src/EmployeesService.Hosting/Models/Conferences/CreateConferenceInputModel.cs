@@ -1,28 +1,25 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace EmployeesService.Core.Models.Entities
+namespace EmployeesService.Hosting.Models.Conferences
 {
-    public class Conference : IdModel<long>
+    public class CreateConferenceInputModel
     {
         /// <summary>
         /// Name of conference
         /// </summary>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
         /// Date of the conference
         /// </summary>
+        [Required]
         public DateTime Date { get; set; }
 
         /// <summary>
         /// Conference description
         /// </summary>
         public string Description { get; set; }
-
-        /// <summary>
-        /// Employees that went to conference
-        /// </summary>
-        public ICollection<Employee> Employees { get; set; }
     }
 }

@@ -1,41 +1,32 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace EmployeesService.Core.Models.Entities
+namespace EmployeesService.Hosting.Models.Employees
 {
-    /// <summary>
-    /// Employee of company
-    /// </summary>
-    public class Employee : IdModel<long>
+    public class CreateEmployeeInputModel
     {
         /// <summary>
         /// First name
         /// </summary>
+        [Required]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Last name
         /// </summary>
+        [Required]
         public string LastName { get; set; }
 
         /// <summary>
         /// Middle name
         /// </summary>
+        [Required]
         public string MiddleName { get; set; }
 
         /// <summary>
         /// Employee birth day
         /// </summary>
+        [Required]
         public DateTime BirthDay { get; set; }
-
-        /// <summary>
-        /// Date of hiring
-        /// </summary>
-        public DateTime HiringDate { get; set; }
-
-        /// <summary>
-        /// Conferences that an employee can attend
-        /// </summary>
-        public ICollection<Conference> Conferences { get; set; }
     }
 }

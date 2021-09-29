@@ -2,8 +2,8 @@ using EmployeesService.Core.Models.Entities;
 
 namespace EmployeesService.Core.Contracts.Repositories
 {
-    public interface IEmployeeRepository : IBaseRepository<EmployeeDto, long>
+    public interface IEmployeeRepository : IBaseRepository<Employee, long>
     {
-        
+
     }
 }

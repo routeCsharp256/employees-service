@@ -21,7 +21,7 @@ namespace EmployeesService.Hosting
         {
             services.AddCustomSwagger(Configuration)
                 .AddCustomDataAccess(Configuration)
-                .AddCustomApplicationSevices();
+                .AddCustomSevices();
 
             services.AddControllers();
         }

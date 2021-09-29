@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
+using MediatR;
 
-namespace EmployeesService.Core.Models.Entities
+namespace EmployeesService.ApplicationServices.Models.Commands
 {
-    public class Conference : IdModel<long>
+    public class CreateConferenceCommand : IRequest<long>
     {
         /// <summary>
         /// Name of conference
@@ -19,10 +19,5 @@ namespace EmployeesService.Core.Models.Entities
         /// Conference description
         /// </summary>
         public string Description { get; set; }
-
-        /// <summary>
-        /// Employees that went to conference
-        /// </summary>
-        public ICollection<Employee> Employees { get; set; }
     }
 }

@@ -25,6 +25,13 @@ namespace EmployeesService.DataAccess.Repositories
             DbSetNoTracking = DbSet.AsNoTracking();
         }
 
+        public virtual async Task<TKey> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        {
+            DbSet.Add(entity);
+            await Context.SaveChangesAsync(cancellationToken);
+            return entity.Id;
+        }
+
         public virtual Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking
