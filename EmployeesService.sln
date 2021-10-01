@@ -15,6 +15,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesService.Core", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesService.Migrations", "src\EmployeesService.Migrations\EmployeesService.Migrations.csproj", "{51109274-56E6-4E92-AC1E-3A5A57DB451A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{70D145EA-43FE-43F4-8C1D-C5913B5CBD50}"
+ProjectSection(SolutionItems) = preProject
+	.editorconfig = .editorconfig
+	.gitignore = .gitignore
+	Directory.build.props = Directory.build.props
+	Directory.build.targets = Directory.build.targets
+	README.md = README.md
+	docker-compose.yml = docker-compose.yml
+	Dockerfile = Dockerfile
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

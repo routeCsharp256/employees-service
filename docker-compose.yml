@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  employees-service:
+    image: '${DOCKER_REGISTRY-}employees-service'
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8443:80"
+    depends_on:
+      - employees-service-postgres-db
+    volumes:
+      - ./src:/src
+      - ./src/libraries:/src/libraries
+  employees-service-postgres-db:
+    image: "postgres"
+    ports:
+      - "5425:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: employees-service
+    volumes:
+      - ./employees-service-postgres-db/dbdata:/var/lib/postgresql/data"
+    command: "-c log_statement=all"
