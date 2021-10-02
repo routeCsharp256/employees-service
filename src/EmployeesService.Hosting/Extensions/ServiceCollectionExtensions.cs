@@ -1,3 +1,4 @@
+using EmployeesService.ApplicationServices.Configurations;
 using EmployeesService.DataAccess.Configurations;
 using EmployeesService.Hosting.Mapper;
 using EmployeesService.Migrations;
@@ -39,7 +40,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddEmployeesServiceDb(configuration);
             services.AddEmployeesRepositories();
-            services.AddEmployeesApplicationServices();
+            services.AddEmployeesApplicationServices(configuration);
 
             return services;
         }

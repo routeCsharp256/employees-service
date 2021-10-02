@@ -1,0 +1,12 @@
+Create new Topic
+docker compose exec broker kafka-topics --create --topic new_employee --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+docker compose exec broker kafka-topics --create --topic conference_employee --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+
+List topics
+docker compose exec broker kafka-topics --bootstrap-server localhost:9092 --list
+
+describe topic
+docker compose exec broker kafka-topics --bootstrap-server localhost:9092 --describe --topic new_employee
+
+Read message in topic
+docker compose exec broker kafka-console-consumer --bootstrap-server localhost:9092 --topic new_employee --from-beginning

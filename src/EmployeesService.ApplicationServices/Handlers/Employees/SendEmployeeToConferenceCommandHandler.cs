@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Confluent.Kafka;
+using EmployeesService.ApplicationServices.MessageBroker;
 using EmployeesService.ApplicationServices.Models.Commands;
 using EmployeesService.Core.Contracts.Repositories;
 using MediatR;
@@ -14,12 +17,17 @@ namespace EmployeesService.ApplicationServices.Handlers.Employees
         private readonly IConferenceRepository _conferenceRepository;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
+        private readonly IProducerBuilderWrapper _producerBuilderWrapper;
 
-        public SendEmployeeToConferenceCommandHandler(IConferenceRepository conferenceRepository, IEmployeeRepository employeeRepository, IMapper mapper)
+        public SendEmployeeToConferenceCommandHandler(IConferenceRepository conferenceRepository,
+            IEmployeeRepository employeeRepository,
+            IMapper mapper,
+            IProducerBuilderWrapper producerBuilderWrapper)
         {
             _conferenceRepository = conferenceRepository;
             _employeeRepository = employeeRepository;
             _mapper = mapper;
+            _producerBuilderWrapper = producerBuilderWrapper;
         }
 
         public async Task<Unit> Handle(SendEmployeeToConferenceCommand request, CancellationToken cancellationToken)
@@ -45,6 +53,20 @@ namespace EmployeesService.ApplicationServices.Handlers.Employees
             await _employeeRepository.UpdateAsync(emp, cancellationToken);
 
             // Отправить запрос на выдачу мерча
+            await _producerBuilderWrapper.Producer.ProduceAsync(_producerBuilderWrapper.MoveToConferenceTopic,
+                new Message<string, string>()
+                {
+                    Key = emp.Id.ToString(),
+                    Value = JsonSerializer.Serialize(new
+                    {
+                        Id = emp.Id,
+                        LastName = emp.LastName,
+                        FirstName = emp.FirstName,
+                        MiddleName = emp.MiddleName,
+                        ConferenceId = conf.Id,
+                        ConferenceName = conf.Name
+                    })
+                }, cancellationToken);
 
             return Unit.Value;
         }

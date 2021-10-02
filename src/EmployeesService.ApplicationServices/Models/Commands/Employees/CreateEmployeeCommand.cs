@@ -24,5 +24,10 @@ namespace EmployeesService.ApplicationServices.Models.Commands
         /// Employee birth day
         /// </summary>
         public DateTime BirthDay { get; set; }
+
+        /// <summary>
+        /// Email address
+        /// </summary>
+        public string Email { get; set; }
     }
 }
