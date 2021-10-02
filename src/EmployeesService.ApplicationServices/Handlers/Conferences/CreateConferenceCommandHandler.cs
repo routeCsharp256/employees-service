@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -27,7 +28,10 @@ namespace EmployeesService.ApplicationServices.Handlers.Conferences
 
         public Task<long> Handle(CreateConferenceCommand request, CancellationToken cancellationToken)
         {
-            return _conferenceRepository.CreateAsync(_mapper.Map<Conference>(request), cancellationToken);
+            var dto = _mapper.Map<Conference>(request);
+            dto.CreateDate = DateTime.UtcNow;
+
+            return _conferenceRepository.CreateAsync(dto, cancellationToken);
         }
     }
 }

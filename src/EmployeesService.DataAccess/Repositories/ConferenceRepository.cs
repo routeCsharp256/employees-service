@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using EmployeesService.Core.Contracts.Repositories;
 using EmployeesService.Core.Models.Entities;
 using EmployeesService.DataAccess.DbContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeesService.DataAccess.Repositories
 {
@@ -15,14 +18,26 @@ namespace EmployeesService.DataAccess.Repositories
 
         }
 
-        public override Task<List<Conference>> GetAllAsync(CancellationToken cancellationToken = default)
+        public Task<List<Conference>> GetAllWithIncludesAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return DbSetNoTracking
+                .Include(it => it.Employees)
+                .ToListAsync(cancellationToken);
         }
 
-        public override Task<List<Conference>> GetByIdsAsync(IReadOnlyCollection<long> ids, CancellationToken cancellationToken = default)
+        public Task<List<Conference>> GetByIdsWithIncludesAsync(IReadOnlyCollection<long> ids,
+            CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return DbSetNoTracking
+                .Include(it => it.Employees)
+                .Where(it => ids.Contains(it.Id))
+                .ToListAsync(cancellationToken);
+        }
+
+        public Task<Conference> CheckIsConferenceIsNotEndAsync(long id, CancellationToken cancellationToken = default)
+        {
+            return DbSetNoTracking
+                .FirstOrDefaultAsync(it => it.Id == id && it.Date > DateTime.Now, cancellationToken);
         }
     }
 }

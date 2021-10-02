@@ -19,9 +19,13 @@ namespace EmployeesService.Hosting
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCustomSwagger(Configuration)
+            services.AddCustomFluentMigrator(Configuration)
+                .AddCustomLogging()
+                .AddCustomOptions(Configuration)
+                .AddCustomSwagger(Configuration)
                 .AddCustomDataAccess(Configuration)
-                .AddCustomSevices();
+                .AddCustomServices(Configuration)
+                .AddCustomMappers();
 
             services.AddControllers();
         }

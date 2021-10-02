@@ -12,7 +12,8 @@ using Microsoft.Extensions.Logging.Abstractions;
 namespace EmployeesService.Hosting.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Area("employees")]
+    [Route("api/[area]")]
     public class EmployeeController : Controller
     {
         private readonly IMediator _mediator;
@@ -35,9 +36,16 @@ namespace EmployeesService.Hosting.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<long> Create([FromBody] CreateEmployeeInputModel viewModel, CancellationToken cancellationToken)
+        public async Task<long> Create([FromBody] CreateEmployeeInputModel value, CancellationToken cancellationToken)
         {
-            return await _mediator.Send(_mapper.Map<CreateEmployeeCommand>(viewModel), cancellationToken);
+            return await _mediator.Send(_mapper.Map<CreateEmployeeCommand>(value), cancellationToken);
+        }
+
+        [HttpPost("toconference")]
+        public async Task SendToConference([FromBody] SendToConferenceInputModel value,
+            CancellationToken cancellationToken)
+        {
+            await _mediator.Send(_mapper.Map<SendEmployeeToConferenceCommand>(value), cancellationToken);
         }
     }
 }

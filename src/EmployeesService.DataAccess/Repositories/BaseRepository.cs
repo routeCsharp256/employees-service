@@ -32,10 +32,29 @@ namespace EmployeesService.DataAccess.Repositories
             return entity.Id;
         }
 
+        public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        {
+            Context.Update(entity);
+            await Context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+        {
+            Context.Remove(entity);
+            await Context.SaveChangesAsync(cancellationToken);
+        }
+
+
         public virtual Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking
                 .ToListAsync(cancellationToken);
+        }
+
+        public virtual Task<TEntity> GetByIdAsync(TKey id, CancellationToken cancellationToken = default)
+        {
+            return DbSetNoTracking
+                .FirstOrDefaultAsync(it => it.Id.Equals(id), cancellationToken);
         }
 
         public virtual Task<List<TEntity>> GetByIdsAsync(IReadOnlyCollection<TKey> ids, CancellationToken cancellationToken = default)

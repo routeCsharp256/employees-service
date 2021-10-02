@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using AutoMapper;
 using EmployeesService.ApplicationServices.Models.Commands;
@@ -13,6 +12,8 @@ namespace EmployeesService.ApplicationServices.Mapper
         public ApplicationServicesMapperProfile()
         {
             CreateConference();
+            GetAllConferences();
+
             CreateEmployee();
             GetAllEmployees();
         }
@@ -21,6 +22,13 @@ namespace EmployeesService.ApplicationServices.Mapper
         {
             CreateMap<CreateConferenceCommand, Conference>(MemberList.Destination)
                 .ForMember(d => d.Id, o => o.MapFrom(s => 0));
+        }
+
+        private void GetAllConferences()
+        {
+            CreateMap<Conference, ConferenceDto>(MemberList.Destination);
+            CreateMap<IEnumerable<Conference>, ConferencesResponse>(MemberList.Destination)
+                .ForMember(d => d.Items, o => o.MapFrom(s => s));
         }
 
         private void CreateEmployee()
@@ -32,7 +40,8 @@ namespace EmployeesService.ApplicationServices.Mapper
         private void GetAllEmployees()
         {
             CreateMap<Employee, EmployeeDto>(MemberList.Destination);
-            CreateMap<IEnumerable<Employee>, EmployeesResponse>(MemberList.Destination);
+            CreateMap<IEnumerable<Employee>, EmployeesResponse>(MemberList.Destination)
+                .ForMember(d => d.Items, o => o.MapFrom(s => s));
         }
     }
 }

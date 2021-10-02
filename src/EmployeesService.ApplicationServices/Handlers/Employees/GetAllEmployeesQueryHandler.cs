@@ -26,7 +26,8 @@ namespace EmployeesService.ApplicationServices.Handlers
 
         public async Task<EmployeesResponse> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<EmployeesResponse>(await _employeeRepository.GetAllAsync(cancellationToken));
+            var result = await _employeeRepository.GetAllAsync(cancellationToken);
+            return _mapper.Map<EmployeesResponse>(result);
         }
     }
 }

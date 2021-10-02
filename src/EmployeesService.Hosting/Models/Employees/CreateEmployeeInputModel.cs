@@ -28,5 +28,12 @@ namespace EmployeesService.Hosting.Models.Employees
         /// </summary>
         [Required]
         public DateTime BirthDay { get; set; }
+
+        /// <summary>
+        /// Email address
+        /// </summary>
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
     }
 }

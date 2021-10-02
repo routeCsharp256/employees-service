@@ -11,6 +11,11 @@ namespace EmployeesService.Core.Models.Entities
         public string Name { get; set; }
 
         /// <summary>
+        /// Create date of the conference
+        /// </summary>
+        public DateTime CreateDate { get; set; }
+
+        /// <summary>
         /// Date of the conference
         /// </summary>
         public DateTime Date { get; set; }

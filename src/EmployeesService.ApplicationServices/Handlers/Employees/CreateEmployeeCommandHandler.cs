@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -27,7 +28,16 @@ namespace EmployeesService.ApplicationServices.Handlers.Employees
 
         public Task<long> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            return _employeeRepository.CreateAsync(_mapper.Map<Employee>(request), cancellationToken);
+            // Подготовка модели для создания нового сотрудника
+            var dto = _mapper.Map<Employee>(request);
+            dto.HiringDate = DateTime.UtcNow;
+
+            // Создаем сотрудника
+            var employeeId = _employeeRepository.CreateAsync(dto, cancellationToken);
+
+            // Отправляем заявку, что сотрудник создан, и нужно выдать мерч
+
+            return employeeId;
         }
     }
 }

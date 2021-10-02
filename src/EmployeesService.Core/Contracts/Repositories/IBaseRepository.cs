@@ -19,11 +19,34 @@ namespace EmployeesService.Core.Contracts.Repositories
         Task<TKey> CreateAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Update entity
+        /// </summary>
+        /// <param name="entity">Entity to Update</param>
+        /// <param name="cancellationToken">Token for cancellation operation.</param>
+        Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete Entity
+        /// </summary>
+        /// <param name="entity">Entity to Delete</param>
+        /// <param name="cancellationToken">Token for cancellation operation.</param>
+        /// <returns></returns>
+        Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get all entities
         /// </summary>
         /// <param name="cancellationToken">Token for cancellation operation.</param>
         /// <returns>Collection of entities</returns>
         Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get entity by id
+        /// </summary>
+        /// <param name="id">Identifier of entity</param>
+        /// <param name="cancellationToken">Token for cancellation operation.</param>
+        /// <returns>Information about entity</returns>
+        Task<TEntity> GetByIdAsync(TKey id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get entity by id

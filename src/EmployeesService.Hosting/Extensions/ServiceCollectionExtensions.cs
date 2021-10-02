@@ -1,5 +1,9 @@
+using EmployeesService.DataAccess.Configurations;
 using EmployeesService.Hosting.Mapper;
+using EmployeesService.Migrations;
+using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -9,6 +13,12 @@ namespace Microsoft.Extensions.DependencyInjection
     /// </summary>
     internal static class ServiceCollectionExtensions
     {
+        internal static IServiceCollection AddCustomOptions(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            return services;
+        }
+
         internal static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSwaggerGen(opt =>
@@ -24,8 +34,11 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        internal static IServiceCollection AddCustomSevices(this IServiceCollection services)
+        internal static IServiceCollection AddCustomServices(this IServiceCollection services,
+            IConfiguration configuration)
         {
+            services.AddEmployeesServiceDb(configuration);
+            services.AddEmployeesRepositories();
             services.AddEmployeesApplicationServices();
 
             return services;
@@ -39,6 +52,31 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static IServiceCollection AddCustomMappers(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(HostingMapperProfile).Assembly);
+
+            return services;
+        }
+
+        internal static IServiceCollection AddCustomLogging(this IServiceCollection services)
+        {
+            services.AddLogging(lb =>
+            {
+                lb.AddConsole();
+                lb.AddFluentMigratorConsole();
+            });
+
+            return services;
+        }
+
+        internal static IServiceCollection AddCustomFluentMigrator(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddFluentMigratorCore()
+                .ConfigureRunner(rb =>
+                    rb.AddPostgres11_0()
+                        .WithGlobalConnectionString(configuration.GetSection(nameof(DbConfiguration))
+                            .Get<DbConfiguration>().ConnectionString)
+                        .ScanIn(typeof(InitialMigration).Assembly).For.Migrations()
+                );
 
             return services;
         }

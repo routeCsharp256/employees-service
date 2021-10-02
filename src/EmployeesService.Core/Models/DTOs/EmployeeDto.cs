@@ -24,6 +24,11 @@ namespace EmployeesService.Core.Models.DTOs
         public string MiddleName { get; set; }
 
         /// <summary>
+        /// Email address
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
         /// Employee birth day
         /// </summary>
         public DateTime BirthDay { get; set; }

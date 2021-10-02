@@ -29,6 +29,11 @@ namespace EmployeesService.Core.Models.Entities
         public DateTime BirthDay { get; set; }
 
         /// <summary>
+        /// Email address
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
         /// Date of hiring
         /// </summary>
         public DateTime HiringDate { get; set; }
