@@ -15,6 +15,8 @@ namespace CSharpCourse.EmployeesService.Migrations
                                   @"email varchar(100) not null, " +
                                   @"birth_day timestamptz default (now() at time zone 'utc'), " +
                                   @"hiring_date timestamptz default (now() at time zone 'utc'), " +
+                                  @"is_fired bool default false, " +
+                                  @"fired_date timestamptz default null, " +
                                   "primary key (id)" +
                                   ");";
             Execute.Sql(employeesRawSql);
@@ -30,8 +32,8 @@ namespace CSharpCourse.EmployeesService.Migrations
             Execute.Sql(conferencesRawSql);
 
             var employeesConferencesRawSql = @$"Create table {Constants.TableNames.EmployeesConferences} (" +
-                                  @$"{Constants.TableNames.Employees}_id long, " +
-                                  @$"{Constants.TableNames.Conferences}_id long" +
+                                  @$"{Constants.TableNames.Employees}_id bigint, " +
+                                  @$"{Constants.TableNames.Conferences}_id bigint" +
                                   ");";
             Execute.Sql(employeesConferencesRawSql);
         }

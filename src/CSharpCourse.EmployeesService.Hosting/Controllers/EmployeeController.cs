@@ -47,5 +47,14 @@ namespace CSharpCourse.EmployeesService.Hosting.Controllers
         {
             await _mediator.Send(_mapper.Map<SendEmployeeToConferenceCommand>(value), cancellationToken);
         }
+
+        [HttpDelete("{id}")]
+        public async Task Dismiss([FromRoute] long id, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new DismissEmployeeCommand()
+            {
+                Id = id
+            }, cancellationToken);
+        }
     }
 }

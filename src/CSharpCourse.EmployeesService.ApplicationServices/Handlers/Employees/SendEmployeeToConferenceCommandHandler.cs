@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Confluent.Kafka;
+using CSharpCourse.Core.Lib.Enums;
+using CSharpCourse.Core.Lib.Events;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.Core.Contracts.Repositories;
@@ -57,14 +59,15 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                 new Message<string, string>()
                 {
                     Key = emp.Id.ToString(),
-                    Value = JsonSerializer.Serialize(new
+                    Value = JsonSerializer.Serialize(new NotificationEvent()
                     {
-                        Id = emp.Id,
-                        LastName = emp.LastName,
-                        FirstName = emp.FirstName,
-                        MiddleName = emp.MiddleName,
-                        ConferenceId = conf.Id,
-                        ConferenceName = conf.Name
+                        EmployeeEmail = emp.Email,
+                        EmployeeName = $"{emp.LastName} {emp.FirstName} {emp.MiddleName}",
+                        EventType = EmployeeEventType.Hiring,
+                        Payload = new MerchDeliveryEventPayload()
+                        {
+                            MerchType = MerchType.ConferencePack
+                        }
                     })
                 }, cancellationToken);
 

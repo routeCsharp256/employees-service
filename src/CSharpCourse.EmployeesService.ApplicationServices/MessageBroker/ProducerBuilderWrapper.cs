@@ -11,6 +11,10 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.MessageBroker
         public IProducer<string, string> Producer { get; set; }
         /// <inheritdoc cref="CreateNewEmployeeTopic"/>
         public string CreateNewEmployeeTopic { get; set; }
+
+        /// <inheritdoc cref="DismissEmployeeTopic"/>
+        public string DismissEmployeeTopic { get; set; }
+
         /// <inheritdoc cref="MoveToConferenceTopic"/>
         public string MoveToConferenceTopic { get; set; }
 
@@ -28,6 +32,7 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.MessageBroker
             Producer = new ProducerBuilder<string, string>(producerConfig).Build();
             CreateNewEmployeeTopic = configValue.CreateNewEmployeeTopic;
             MoveToConferenceTopic = configValue.MoveToConferenceTopic;
+            DismissEmployeeTopic = configValue.DismissEmployeeTopic;
         }
     }
 }

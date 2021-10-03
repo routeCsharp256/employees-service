@@ -39,6 +39,16 @@ namespace CSharpCourse.EmployeesService.Core.Models.Entities
         public DateTime HiringDate { get; set; }
 
         /// <summary>
+        /// Является ли сотрудник уволеным
+        /// </summary>
+        public bool IsFired { get; set; }
+
+        /// <summary>
+        /// Дата увольнения сотрудника
+        /// </summary>
+        public DateTime? FiredDate { get; set; }
+
+        /// <summary>
         /// Conferences that an employee can attend
         /// </summary>
         public ICollection<Conference> Conferences { get; set; }

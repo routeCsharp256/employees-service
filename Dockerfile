@@ -7,24 +7,24 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["./Directory.build.props", "./"]
 COPY ["./Directory.build.targets", "./"]
-COPY ["./src/EmployeesService.Core/EmployeesService.Core.csproj", "./EmployeesService.Core/"]
-COPY ["./src/EmployeesService.ApplicationServices/EmployeesService.ApplicationServices.csproj", "./EmployeesService.ApplicationServices/"]
-COPY ["./src/EmployeesService.DataAccess/EmployeesService.DataAccess.csproj", "./EmployeesService.DataAccess/"]
-COPY ["./src/EmployeesService.Migrations/EmployeesService.Migrations.csproj", "./EmployeesService.Migrations/"]
-COPY ["./src/EmployeesService.Hosting/EmployeesService.Hosting.csproj", "./EmployeesService.Hosting/"]
-RUN dotnet restore "./EmployeesService.Hosting/EmployeesService.Hosting.csproj"
+COPY ["./src/CSharpCourse.EmployeesService.Core/CSharpCourse.EmployeesService.Core.csproj", "./EmployeesService.Core/"]
+COPY ["./src/CSharpCourse.EmployeesService.ApplicationServices/CSharpCourse.EmployeesService.ApplicationServices.csproj", "./EmployeesService.ApplicationServices/"]
+COPY ["./src/CSharpCourse.EmployeesService.DataAccess/CSharpCourse.EmployeesService.DataAccess.csproj", "./EmployeesService.DataAccess/"]
+COPY ["./src/CSharpCourse.EmployeesService.Migrations/CSharpCourse.EmployeesService.Migrations.csproj", "./EmployeesService.Migrations/"]
+COPY ["./src/CSharpCourse.EmployeesService.Hosting/CSharpCourse.EmployeesService.Hosting.csproj", "./EmployeesService.Hosting/"]
+RUN dotnet restore "./EmployeesService.Hosting/CSharpCourse.EmployeesService.Hosting.csproj"
 
 COPY "./Directory.build.props" .
 COPY "./Directory.build.targets" .
 COPY "./src" .
-WORKDIR "/src/EmployeesService.Hosting/."
+WORKDIR "/src/CSharpCourse.EmployeesService.Hosting/."
 
-RUN dotnet build "EmployeesService.Hosting.csproj" -c Release -o /app/build
+RUN dotnet build "CSharpCourse.EmployeesService.Hosting.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "EmployeesService.Hosting.csproj" -c Release -o /app/publish
+RUN dotnet publish "CSharpCourse.EmployeesService.Hosting.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "EmployeesService.Hosting.dll"]
+ENTRYPOINT ["dotnet", "CSharpCourse.EmployeesService.Hosting.dll"]

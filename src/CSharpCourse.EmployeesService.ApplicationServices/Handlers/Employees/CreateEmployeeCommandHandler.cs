@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging.Abstractions;
 using AutoMapper;
 using Confluent.Kafka;
+using CSharpCourse.Core.Lib.Enums;
+using CSharpCourse.Core.Lib.Events;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
 using CSharpCourse.EmployeesService.Core.Models.Entities;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
@@ -37,6 +39,7 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
             // Подготовка модели для создания нового сотрудника
             var dto = _mapper.Map<Employee>(request);
             dto.HiringDate = DateTime.UtcNow;
+            dto.FiredDate = null;
 
             // Создаем сотрудника
             var employeeId = await _employeeRepository.CreateAsync(dto, cancellationToken);
@@ -46,12 +49,15 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                 new Message<string, string>()
                 {
                     Key = employeeId.ToString(),
-                    Value = JsonSerializer.Serialize(new
+                    Value = JsonSerializer.Serialize(new NotificationEvent()
                     {
-                        Id = employeeId,
-                        LastName = dto.LastName,
-                        FirstName = dto.FirstName,
-                        MiddleName = dto.MiddleName
+                        EmployeeEmail = dto.Email,
+                        EmployeeName = $"{dto.LastName} {dto.FirstName} {dto.MiddleName}",
+                        EventType = EmployeeEventType.Hiring,
+                        Payload = new MerchDeliveryEventPayload()
+                        {
+                            MerchType = MerchType.WelcomePack
+                        }
                     })
                 }, cancellationToken);
 

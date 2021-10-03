@@ -44,7 +44,6 @@ namespace CSharpCourse.EmployeesService.DataAccess.Repositories
             await Context.SaveChangesAsync(cancellationToken);
         }
 
-
         public virtual Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking

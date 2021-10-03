@@ -16,5 +16,9 @@ namespace CSharpCourse.EmployeesService.Core.Contracts.Repositories
             CancellationToken cancellationToken = default);
 
         Task<List<long>> GetConferenceIdsAsync(long id, CancellationToken cancellationToken = default);
+
+        Task DismissAsync(long id, CancellationToken cancellationToken = default);
+
+        Task DismissAsync(Employee employee, CancellationToken cancellationToken = default);
     }
 }

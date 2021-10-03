@@ -28,6 +28,8 @@ namespace CSharpCourse.EmployeesService.DataAccess.DbContexts
                 ent.Property(p => p.Email).HasColumnName("email");
                 ent.Property(p => p.BirthDay).HasColumnName("birth_day");
                 ent.Property(p => p.HiringDate).HasColumnName("hiring_date");
+                ent.Property(p => p.IsFired).HasColumnName("is_fired");
+                ent.Property(p => p.FiredDate).HasColumnName("fired_date");
             });
 
             modelBuilder.Entity<Conference>(ent =>

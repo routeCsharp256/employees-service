@@ -7,16 +7,21 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.MessageBroker
         /// <summary>
         /// Producer instance
         /// </summary>
-        public IProducer<string, string> Producer { get; set; }
+        IProducer<string, string> Producer { get; set; }
 
         /// <summary>
         /// Topic for create new employee event
         /// </summary>
-        public string CreateNewEmployeeTopic { get; set; }
+        string CreateNewEmployeeTopic { get; set; }
+
+        /// <summary>
+        /// Topic for dismiss employee event
+        /// </summary>
+        string DismissEmployeeTopic { get; set; }
 
         /// <summary>
         /// Topic for send employee to conference
         /// </summary>
-        public string MoveToConferenceTopic { get; set; }
+        string MoveToConferenceTopic { get; set; }
     }
 }
