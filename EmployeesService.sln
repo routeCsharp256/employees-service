@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{771FAA91-64CE-47F9-91F4-C922EDD1199C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesService.Hosting", "src\EmployeesService.Hosting\EmployeesService.Hosting.csproj", "{88364F53-5C04-4A74-AAE2-CA5856721AB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.Hosting", "src\CSharpCourse.EmployeesService.Hosting\CSharpCourse.EmployeesService.Hosting.csproj", "{88364F53-5C04-4A74-AAE2-CA5856721AB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesService.ApplicationServices", "src\EmployeesService.ApplicationServices\EmployeesService.ApplicationServices.csproj", "{255C3C7B-7458-4699-8C1C-DBB4F0B474D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.ApplicationServices", "src\CSharpCourse.EmployeesService.ApplicationServices\CSharpCourse.EmployeesService.ApplicationServices.csproj", "{255C3C7B-7458-4699-8C1C-DBB4F0B474D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesService.DataAccess", "src\EmployeesService.DataAccess\EmployeesService.DataAccess.csproj", "{2F642D1E-0F11-4FC1-81C1-720B97106031}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.DataAccess", "src\CSharpCourse.EmployeesService.DataAccess\CSharpCourse.EmployeesService.DataAccess.csproj", "{2F642D1E-0F11-4FC1-81C1-720B97106031}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesService.Core", "src\EmployeesService.Core\EmployeesService.Core.csproj", "{DB5C399D-5124-44F2-867A-5331A72DE2BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.Core", "src\CSharpCourse.EmployeesService.Core\CSharpCourse.EmployeesService.Core.csproj", "{DB5C399D-5124-44F2-867A-5331A72DE2BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesService.Migrations", "src\EmployeesService.Migrations\EmployeesService.Migrations.csproj", "{51109274-56E6-4E92-AC1E-3A5A57DB451A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.Migrations", "src\CSharpCourse.EmployeesService.Migrations\CSharpCourse.EmployeesService.Migrations.csproj", "{51109274-56E6-4E92-AC1E-3A5A57DB451A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{70D145EA-43FE-43F4-8C1D-C5913B5CBD50}"
 ProjectSection(SolutionItems) = preProject
