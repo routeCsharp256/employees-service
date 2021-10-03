@@ -30,8 +30,8 @@ namespace CSharpCourse.EmployeesService.Migrations
             Execute.Sql(conferencesRawSql);
 
             var employeesConferencesRawSql = @$"Create table {Constants.TableNames.EmployeesConferences} (" +
-                                  @$"{Constants.TableNames.Employees}_id int, " +
-                                  @$"{Constants.TableNames.Conferences}_id int" +
+                                  @$"{Constants.TableNames.Employees}_id long, " +
+                                  @$"{Constants.TableNames.Conferences}_id long" +
                                   ");";
             Execute.Sql(employeesConferencesRawSql);
         }
