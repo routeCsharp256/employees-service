@@ -17,6 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static IServiceCollection AddCustomOptions(this IServiceCollection services,
             IConfiguration configuration)
         {
+
             return services;
         }
 

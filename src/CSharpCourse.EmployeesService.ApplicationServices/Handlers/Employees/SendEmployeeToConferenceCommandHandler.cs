@@ -8,6 +8,7 @@ using Confluent.Kafka;
 using CSharpCourse.Core.Lib.Enums;
 using CSharpCourse.Core.Lib.Events;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
+using CSharpCourse.EmployeesService.ApplicationServices.Models;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.Core.Contracts.Repositories;
 using MediatR;
@@ -63,10 +64,15 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                     {
                         EmployeeEmail = emp.Email,
                         EmployeeName = $"{emp.LastName} {emp.FirstName} {emp.MiddleName}",
-                        EventType = EmployeeEventType.Hiring,
+                        EventType = EmployeeEventType.ConferenceAttendance,
                         Payload = new MerchDeliveryEventPayload()
                         {
-                            MerchType = MerchType.ConferencePack
+                            MerchType = request.AsWhom switch
+                            {
+                                EmployeeInConferenceType.AsListener => MerchType.ConferenceListenerPack,
+                                EmployeeInConferenceType.AsSpeaker => MerchType.ConferenceSpeakerPack,
+                                _ => throw new Exception("Merch type not defined")
+                            }
                         }
                     })
                 }, cancellationToken);

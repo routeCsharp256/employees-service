@@ -26,13 +26,13 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.MessageBroker
 
             var producerConfig = new ProducerConfig
             {
-                BootstrapServers = configValue.BootstrapServers
+                BootstrapServers = configValue.BootstrapServer
             };
 
             Producer = new ProducerBuilder<string, string>(producerConfig).Build();
-            CreateNewEmployeeTopic = configValue.CreateNewEmployeeTopic;
-            MoveToConferenceTopic = configValue.MoveToConferenceTopic;
-            DismissEmployeeTopic = configValue.DismissEmployeeTopic;
+            CreateNewEmployeeTopic = configValue.Topic;
+            MoveToConferenceTopic = configValue.Topic;
+            DismissEmployeeTopic = configValue.Topic;
         }
     }
 }

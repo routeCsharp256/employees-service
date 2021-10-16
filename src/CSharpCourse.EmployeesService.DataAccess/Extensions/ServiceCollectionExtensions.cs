@@ -15,14 +15,10 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddEmployeesServiceDb(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<DbConfiguration>(it =>
-                configuration.GetSection(nameof(DbConfiguration)).Get<DbConfiguration>());
-            var dbConfiguration = configuration.GetSection(nameof(DbConfiguration)).Get<DbConfiguration>();
+            services.Configure<DbConfiguration>(configuration);
 
-            services.AddDbContext<EmployeesDbContext>(opt =>
-            {
-                opt.UseNpgsql(dbConfiguration.ConnectionString);
-            });
+            var dbConf = configuration.Get<DbConfiguration>();
+            services.AddDbContext<EmployeesDbContext>(opt => { opt.UseNpgsql(dbConf.ConnectionString); });
 
             return services;
         }

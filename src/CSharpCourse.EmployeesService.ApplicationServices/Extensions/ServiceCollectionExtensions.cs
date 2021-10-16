@@ -25,8 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
         private static IServiceCollection AddKafkaServices(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<KafkaConfiguration>(opt =>
-                configuration.GetSection(nameof(KafkaConfiguration)).Bind(opt));
+            services.Configure<KafkaConfiguration>(configuration);
             services.AddScoped<IProducerBuilderWrapper, ProducerBuilderWrapper>();
 
             return services;
