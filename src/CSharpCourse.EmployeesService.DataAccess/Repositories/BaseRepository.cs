@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CSharpCourse.EmployeesService.Core.Contracts.Repositories;
-using CSharpCourse.EmployeesService.Core.Models;
+using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
+using CSharpCourse.EmployeesService.Domain.Models;
 using CSharpCourse.EmployeesService.DataAccess.DbContexts;
 using Microsoft.EntityFrameworkCore;
 

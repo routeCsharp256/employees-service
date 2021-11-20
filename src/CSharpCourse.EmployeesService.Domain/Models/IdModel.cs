@@ -1,6 +1,6 @@
 using System;
 
-namespace CSharpCourse.EmployeesService.Core.Models
+namespace CSharpCourse.EmployeesService.Domain.Models
 {
     public class IdModel<TKey> : IIdModel<TKey>
         where TKey : IEquatable<TKey>

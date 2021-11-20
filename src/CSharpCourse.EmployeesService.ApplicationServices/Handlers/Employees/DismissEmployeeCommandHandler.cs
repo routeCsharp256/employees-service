@@ -8,7 +8,7 @@ using CSharpCourse.Core.Lib.Enums;
 using CSharpCourse.Core.Lib.Events;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
-using CSharpCourse.EmployeesService.Core.Contracts.Repositories;
+using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
 using MediatR;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees

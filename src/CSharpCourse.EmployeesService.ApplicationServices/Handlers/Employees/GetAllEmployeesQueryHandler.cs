@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Queries;
-using CSharpCourse.EmployeesService.Core.Contracts.Repositories;
+using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;

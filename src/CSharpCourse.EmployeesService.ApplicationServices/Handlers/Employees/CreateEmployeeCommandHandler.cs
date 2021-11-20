@@ -8,9 +8,9 @@ using Confluent.Kafka;
 using CSharpCourse.Core.Lib.Enums;
 using CSharpCourse.Core.Lib.Events;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
-using CSharpCourse.EmployeesService.Core.Models.Entities;
+using CSharpCourse.EmployeesService.Domain.Models.Entities;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
-using CSharpCourse.EmployeesService.Core.Contracts.Repositories;
+using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

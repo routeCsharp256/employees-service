@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSharpCourse.EmployeesService.Core\CSharpCourse.EmployeesService.Core.csproj" />
+    <ProjectReference Include="..\CSharpCourse.EmployeesService.Domain\CSharpCourse.EmployeesService.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CSharpCourse.EmployeesService.Core.Models.Entities;
+using CSharpCourse.EmployeesService.Domain.Models.Entities;
 
-namespace CSharpCourse.EmployeesService.Core.Contracts.Repositories
+namespace CSharpCourse.EmployeesService.Domain.Contracts.Repositories
 {
     public interface IEmployeeRepository : IBaseRepository<Employee, long>
     {

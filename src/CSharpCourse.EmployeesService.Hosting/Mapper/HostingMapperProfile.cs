@@ -1,7 +1,7 @@
 using AutoMapper;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Queries;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
-using CSharpCourse.EmployeesService.Core.Models.DTOs;
+using CSharpCourse.EmployeesService.Domain.Models.DTOs;
 using CSharpCourse.EmployeesService.Hosting.Models.Conferences;
 using CSharpCourse.EmployeesService.Hosting.Models.Employees;
 

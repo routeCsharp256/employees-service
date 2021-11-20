@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["./Directory.build.props", "./"]
 COPY ["./Directory.build.targets", "./"]
-COPY ["./src/CSharpCourse.EmployeesService.Core/CSharpCourse.EmployeesService.Core.csproj", "./EmployeesService.Core/"]
+COPY ["./src/CSharpCourse.EmployeesService.Domain/CSharpCourse.EmployeesService.Domain.csproj", "./EmployeesService.Domain/"]
 COPY ["./src/CSharpCourse.EmployeesService.ApplicationServices/CSharpCourse.EmployeesService.ApplicationServices.csproj", "./EmployeesService.ApplicationServices/"]
 COPY ["./src/CSharpCourse.EmployeesService.DataAccess/CSharpCourse.EmployeesService.DataAccess.csproj", "./EmployeesService.DataAccess/"]
 COPY ["./src/CSharpCourse.EmployeesService.Migrations/CSharpCourse.EmployeesService.Migrations.csproj", "./EmployeesService.Migrations/"]

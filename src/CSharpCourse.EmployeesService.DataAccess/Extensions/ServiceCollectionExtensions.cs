@@ -1,4 +1,4 @@
-using CSharpCourse.EmployeesService.Core.Contracts.Repositories;
+using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
 using CSharpCourse.EmployeesService.DataAccess.Configurations;
 using CSharpCourse.EmployeesService.DataAccess.DbContexts;
 using CSharpCourse.EmployeesService.DataAccess.Repositories;

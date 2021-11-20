@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace CSharpCourse.EmployeesService.Core.Models.DTOs
+namespace CSharpCourse.EmployeesService.Domain.Models.Entities
 {
     /// <summary>
     /// Employee of company
     /// </summary>
-    public class EmployeeDto : IdModel<long>
+    public class Employee : IdModel<long>
     {
         /// <summary>
         /// First name
@@ -24,14 +24,14 @@ namespace CSharpCourse.EmployeesService.Core.Models.DTOs
         public string MiddleName { get; set; }
 
         /// <summary>
-        /// Email address
-        /// </summary>
-        public string Email { get; set; }
-
-        /// <summary>
         /// Employee birth day
         /// </summary>
         public DateTime BirthDay { get; set; }
+
+        /// <summary>
+        /// Email address
+        /// </summary>
+        public string Email { get; set; }
 
         /// <summary>
         /// Date of hiring
@@ -39,8 +39,18 @@ namespace CSharpCourse.EmployeesService.Core.Models.DTOs
         public DateTime HiringDate { get; set; }
 
         /// <summary>
+        /// Является ли сотрудник уволеным
+        /// </summary>
+        public bool IsFired { get; set; }
+
+        /// <summary>
+        /// Дата увольнения сотрудника
+        /// </summary>
+        public DateTime? FiredDate { get; set; }
+
+        /// <summary>
         /// Conferences that an employee can attend
         /// </summary>
-        public ICollection<ConferenceDto> Conferences { get; set; }
+        public ICollection<Conference> Conferences { get; set; }
     }
 }

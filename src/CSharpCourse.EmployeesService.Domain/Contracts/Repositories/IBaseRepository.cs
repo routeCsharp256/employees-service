@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CSharpCourse.EmployeesService.Core.Models;
+using CSharpCourse.EmployeesService.Domain.Models;
 
-namespace CSharpCourse.EmployeesService.Core.Contracts.Repositories
+namespace CSharpCourse.EmployeesService.Domain.Contracts.Repositories
 {
     public interface IBaseRepository<TEntity, TKey>
         where TEntity : class, IIdModel<TKey>

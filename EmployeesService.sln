@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesServi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.DataAccess", "src\CSharpCourse.EmployeesService.DataAccess\CSharpCourse.EmployeesService.DataAccess.csproj", "{2F642D1E-0F11-4FC1-81C1-720B97106031}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.Core", "src\CSharpCourse.EmployeesService.Core\CSharpCourse.EmployeesService.Core.csproj", "{DB5C399D-5124-44F2-867A-5331A72DE2BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.Domain", "src\CSharpCourse.EmployeesService.Domain\CSharpCourse.EmployeesService.Domain.csproj", "{DB5C399D-5124-44F2-867A-5331A72DE2BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.Migrations", "src\CSharpCourse.EmployeesService.Migrations\CSharpCourse.EmployeesService.Migrations.csproj", "{51109274-56E6-4E92-AC1E-3A5A57DB451A}"
 EndProject

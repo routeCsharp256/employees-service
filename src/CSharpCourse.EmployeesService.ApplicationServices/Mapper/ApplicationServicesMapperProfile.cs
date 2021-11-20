@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using AutoMapper;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Queries;
-using CSharpCourse.EmployeesService.Core.Models.DTOs;
-using CSharpCourse.EmployeesService.Core.Models.Entities;
+using CSharpCourse.EmployeesService.Domain.Models.DTOs;
+using CSharpCourse.EmployeesService.Domain.Models.Entities;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Mapper
 {

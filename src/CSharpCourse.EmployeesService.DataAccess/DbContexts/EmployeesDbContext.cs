@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using CSharpCourse.EmployeesService.Core.Models.Entities;
+using CSharpCourse.EmployeesService.Domain.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 

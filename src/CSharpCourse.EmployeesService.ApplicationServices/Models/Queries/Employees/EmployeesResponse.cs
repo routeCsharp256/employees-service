@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using CSharpCourse.EmployeesService.Core.Models.DTOs;
+using CSharpCourse.EmployeesService.Domain.Models.DTOs;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Models.Queries
 {

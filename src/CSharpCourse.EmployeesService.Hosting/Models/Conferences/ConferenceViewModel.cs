@@ -1,5 +1,5 @@
 using System;
-using CSharpCourse.EmployeesService.Core.Models;
+using CSharpCourse.EmployeesService.Domain.Models;
 
 namespace CSharpCourse.EmployeesService.Hosting.Models.Conferences
 {

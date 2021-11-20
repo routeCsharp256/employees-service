@@ -1,19 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace CSharpCourse.EmployeesService.Core.Models.Entities
+namespace CSharpCourse.EmployeesService.Domain.Models.DTOs
 {
-    public class Conference : IdModel<long>
+    public class ConferenceDto : IdModel<long>
     {
         /// <summary>
         /// Name of conference
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Create date of the conference
-        /// </summary>
-        public DateTime CreateDate { get; set; }
 
         /// <summary>
         /// Date of the conference
@@ -28,6 +23,6 @@ namespace CSharpCourse.EmployeesService.Core.Models.Entities
         /// <summary>
         /// Employees that went to conference
         /// </summary>
-        public ICollection<Employee> Employees { get; set; }
+        public ICollection<EmployeeDto> Employees { get; set; }
     }
 }

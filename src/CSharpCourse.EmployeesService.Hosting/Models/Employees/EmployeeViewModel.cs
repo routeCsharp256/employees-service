@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CSharpCourse.EmployeesService.Core.Models;
-using CSharpCourse.EmployeesService.Core.Models.DTOs;
+using CSharpCourse.EmployeesService.Domain.Models;
+using CSharpCourse.EmployeesService.Domain.Models.DTOs;
 using CSharpCourse.EmployeesService.Hosting.Models.Conferences;
 
 namespace CSharpCourse.EmployeesService.Hosting.Models.Employees
