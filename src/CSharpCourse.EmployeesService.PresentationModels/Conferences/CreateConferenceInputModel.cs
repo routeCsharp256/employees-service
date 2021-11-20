@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CSharpCourse.EmployeesService.Hosting.Models.Conferences
+namespace CSharpCourse.EmployeesService.PresentationModels.Conferences
 {
-    public class CreateConferenceInputModel
+    public sealed class CreateConferenceInputModel
     {
         /// <summary>
         /// Name of conference

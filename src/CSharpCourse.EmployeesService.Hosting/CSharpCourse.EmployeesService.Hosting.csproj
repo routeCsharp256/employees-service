@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CSharpCourse.EmployeesService.ApplicationServices\CSharpCourse.EmployeesService.ApplicationServices.csproj" />
-    <ProjectReference Include="..\CSharpCourse.EmployeesService.DataAccess\CSharpCourse.EmployeesService.DataAccess.csproj" />
+    <ProjectReference Include="..\CSharpCourse.EmployeesService.DataAccess.EntityFramework\CSharpCourse.EmployeesService.DataAccess.EntityFramework.csproj" />
+    <ProjectReference Include="..\CSharpCourse.EmployeesService.PresentationModels\CSharpCourse.EmployeesService.PresentationModels.csproj" />
    <ProjectReference Include="..\CSharpCourse.EmployeesService.Migrations\CSharpCourse.EmployeesService.Migrations.csproj" />
   </ItemGroup>
 
@@ -20,6 +21,10 @@
     <Content Update="appsettings.Development.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models" />
   </ItemGroup>
 
 </Project>

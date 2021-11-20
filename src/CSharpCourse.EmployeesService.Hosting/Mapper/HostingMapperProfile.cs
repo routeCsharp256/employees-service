@@ -2,8 +2,8 @@ using AutoMapper;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Queries;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.Domain.Models.DTOs;
-using CSharpCourse.EmployeesService.Hosting.Models.Conferences;
-using CSharpCourse.EmployeesService.Hosting.Models.Employees;
+using CSharpCourse.EmployeesService.PresentationModels.Conferences;
+using CSharpCourse.EmployeesService.PresentationModels.Employees;
 
 namespace CSharpCourse.EmployeesService.Hosting.Mapper
 {

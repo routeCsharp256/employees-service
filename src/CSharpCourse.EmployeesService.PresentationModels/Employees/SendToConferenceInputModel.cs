@@ -1,8 +1,8 @@
-﻿using CSharpCourse.EmployeesService.ApplicationServices.Models;
+﻿using CSharpCourse.EmployeesService.PresentationModels.Enums;
 
-namespace CSharpCourse.EmployeesService.Hosting.Models.Employees
+namespace CSharpCourse.EmployeesService.PresentationModels.Employees
 {
-    public class SendToConferenceInputModel
+    public sealed class SendToConferenceInputModel
     {
         /// <summary>
         /// Идентификатор сотрудника которого отправляют на конференцию

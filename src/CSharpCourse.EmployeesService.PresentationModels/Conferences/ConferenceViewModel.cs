@@ -1,9 +1,8 @@
 using System;
-using CSharpCourse.EmployeesService.Domain.Models;
 
-namespace CSharpCourse.EmployeesService.Hosting.Models.Conferences
+namespace CSharpCourse.EmployeesService.PresentationModels.Conferences
 {
-    public class ConferenceViewModel : IdModel<long>
+    public sealed class ConferenceViewModel : IdModel<long>
     {
         /// <summary>
         /// Name of conference

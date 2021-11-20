@@ -1,4 +1,4 @@
-namespace CSharpCourse.EmployeesService.ApplicationServices.Models
+﻿namespace CSharpCourse.EmployeesService.PresentationModels.Enums
 {
     public enum EmployeeInConferenceType
     {
