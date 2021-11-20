@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesServi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.ApplicationServices", "src\CSharpCourse.EmployeesService.ApplicationServices\CSharpCourse.EmployeesService.ApplicationServices.csproj", "{255C3C7B-7458-4699-8C1C-DBB4F0B474D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.DataAccess", "src\CSharpCourse.EmployeesService.DataAccess\CSharpCourse.EmployeesService.DataAccess.csproj", "{2F642D1E-0F11-4FC1-81C1-720B97106031}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.DataAccess.EntityFramework", "src\CSharpCourse.EmployeesService.DataAccess.EntityFramework\CSharpCourse.EmployeesService.DataAccess.EntityFramework.csproj", "{2F642D1E-0F11-4FC1-81C1-720B97106031}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.Domain", "src\CSharpCourse.EmployeesService.Domain\CSharpCourse.EmployeesService.Domain.csproj", "{DB5C399D-5124-44F2-867A-5331A72DE2BD}"
 EndProject
@@ -25,6 +25,10 @@ ProjectSection(SolutionItems) = preProject
 	docker-compose.yml = docker-compose.yml
 	Dockerfile = Dockerfile
 EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.PresentationModels", "src\CSharpCourse.EmployeesService.PresentationModels\CSharpCourse.EmployeesService.PresentationModels.csproj", "{CD282DD9-397D-42A9-927D-FE53BD70678E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.DataAccess.Dapper", "src\CSharpCourse.EmployeesService.DataAccess.Dapper\CSharpCourse.EmployeesService.DataAccess.Dapper.csproj", "{30D2D927-F87E-442E-9F2F-665509CFC1B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +103,30 @@ Global
 		{51109274-56E6-4E92-AC1E-3A5A57DB451A}.Release|x64.Build.0 = Release|Any CPU
 		{51109274-56E6-4E92-AC1E-3A5A57DB451A}.Release|x86.ActiveCfg = Release|Any CPU
 		{51109274-56E6-4E92-AC1E-3A5A57DB451A}.Release|x86.Build.0 = Release|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Debug|x64.Build.0 = Debug|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Debug|x86.Build.0 = Debug|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Release|x64.ActiveCfg = Release|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Release|x64.Build.0 = Release|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD282DD9-397D-42A9-927D-FE53BD70678E}.Release|x86.Build.0 = Release|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Debug|x64.Build.0 = Debug|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Debug|x86.Build.0 = Debug|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Release|x64.ActiveCfg = Release|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Release|x64.Build.0 = Release|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Release|x86.ActiveCfg = Release|Any CPU
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{88364F53-5C04-4A74-AAE2-CA5856721AB1} = {771FAA91-64CE-47F9-91F4-C922EDD1199C}
@@ -106,5 +134,7 @@ Global
 		{2F642D1E-0F11-4FC1-81C1-720B97106031} = {771FAA91-64CE-47F9-91F4-C922EDD1199C}
 		{DB5C399D-5124-44F2-867A-5331A72DE2BD} = {771FAA91-64CE-47F9-91F4-C922EDD1199C}
 		{51109274-56E6-4E92-AC1E-3A5A57DB451A} = {771FAA91-64CE-47F9-91F4-C922EDD1199C}
+		{CD282DD9-397D-42A9-927D-FE53BD70678E} = {771FAA91-64CE-47F9-91F4-C922EDD1199C}
+		{30D2D927-F87E-442E-9F2F-665509CFC1B7} = {771FAA91-64CE-47F9-91F4-C922EDD1199C}
 	EndGlobalSection
 EndGlobal
