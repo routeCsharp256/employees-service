@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Queries;
-using CSharpCourse.EmployeesService.Hosting.Models.Employees;
+using CSharpCourse.EmployeesService.PresentationModels.Employees;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

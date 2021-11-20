@@ -48,6 +48,8 @@ namespace CSharpCourse.EmployeesService.Domain.Models.Entities
         /// </summary>
         public DateTime? FiredDate { get; set; }
 
+        public int ClothingSize { get; set; }
+
         /// <summary>
         /// Conferences that an employee can attend
         /// </summary>

@@ -30,6 +30,7 @@ namespace CSharpCourse.EmployeesService.DataAccess.DbContexts
                 ent.Property(p => p.HiringDate).HasColumnName("hiring_date");
                 ent.Property(p => p.IsFired).HasColumnName("is_fired");
                 ent.Property(p => p.FiredDate).HasColumnName("fired_date");
+                ent.Property(p => p.ClothingSize).HasColumnName("clothing_size");
             });
 
             modelBuilder.Entity<Conference>(ent =>
