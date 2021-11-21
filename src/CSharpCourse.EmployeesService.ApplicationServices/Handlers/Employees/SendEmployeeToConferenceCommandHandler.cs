@@ -12,6 +12,7 @@ using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Enums;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Conference;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Employee;
+using CSharpCourse.EmployeesService.Domain.Contracts;
 using MediatR;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
@@ -20,18 +21,21 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
     {
         private readonly IConferenceRepository _conferenceRepository;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IProducerBuilderWrapper _producerBuilderWrapper;
 
         public SendEmployeeToConferenceCommandHandler(IConferenceRepository conferenceRepository,
             IEmployeeRepository employeeRepository,
             IMapper mapper,
-            IProducerBuilderWrapper producerBuilderWrapper)
+            IProducerBuilderWrapper producerBuilderWrapper,
+            IUnitOfWork unitOfWork)
         {
             _conferenceRepository = conferenceRepository;
             _employeeRepository = employeeRepository;
             _mapper = mapper;
             _producerBuilderWrapper = producerBuilderWrapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(SendEmployeeToConferenceCommand request, CancellationToken cancellationToken)
@@ -51,6 +55,8 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
             if (emp.Conferences.Select(it => it.Id).Contains(request.EmployeeId))
                 throw new Exception($"Employee with id {request.EmployeeId} was registered in " +
                                     $"conference with id {request.ConferenceId}");
+
+            await _unitOfWork.StartTransaction(cancellationToken);
 
             // Записать что сотрудник идет на коференцию
             emp.Conferences.Add(conf);
@@ -77,6 +83,8 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                         }
                     })
                 }, cancellationToken);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }
