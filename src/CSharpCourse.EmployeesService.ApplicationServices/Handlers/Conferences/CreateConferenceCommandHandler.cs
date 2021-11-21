@@ -3,7 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
-using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
+using CSharpCourse.EmployeesService.Domain.AggregationModels.Conference;
+using CSharpCourse.EmployeesService.Domain.Contracts;
 using CSharpCourse.EmployeesService.Domain.Models.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -14,24 +15,30 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Conferences
     public class CreateConferenceCommandHandler : IRequestHandler<CreateConferenceCommand, long>
     {
         private readonly IConferenceRepository _conferenceRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<CreateConferenceCommandHandler> _logger;
         private readonly IMapper _mapper;
 
         public CreateConferenceCommandHandler(IConferenceRepository repository,
-            IMapper mapper,
-            ILogger<CreateConferenceCommandHandler> logger = null)
+            IMapper mapper, IUnitOfWork unitOfWork, ILogger<CreateConferenceCommandHandler> logger = null)
         {
             _conferenceRepository = repository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
             _logger = logger ?? NullLogger<CreateConferenceCommandHandler>.Instance;
         }
 
-        public Task<long> Handle(CreateConferenceCommand request, CancellationToken cancellationToken)
+        public async Task<long> Handle(CreateConferenceCommand request, CancellationToken cancellationToken)
         {
             var dto = _mapper.Map<Conference>(request);
             dto.CreateDate = DateTime.UtcNow;
 
-            return _conferenceRepository.CreateAsync(dto, cancellationToken);
+            await _unitOfWork.StartTransaction(cancellationToken);
+            var result = await _conferenceRepository.CreateAsync(dto, cancellationToken);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return dto.Id;
         }
     }
 }

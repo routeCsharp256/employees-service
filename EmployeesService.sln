@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesServi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.DataAccess.Dapper", "src\CSharpCourse.EmployeesService.DataAccess.Dapper\CSharpCourse.EmployeesService.DataAccess.Dapper.csproj", "{30D2D927-F87E-442E-9F2F-665509CFC1B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{84FF6288-71F7-4FB6-AC2E-06ABF9F36857}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

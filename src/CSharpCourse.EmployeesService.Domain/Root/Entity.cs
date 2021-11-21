@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MediatR;
 
-namespace CSharpCourse.MerchandiseApi.Domain.Root
+namespace CSharpCourse.EmployeesService.Domain.Root
 {
     public abstract class Entity
     {

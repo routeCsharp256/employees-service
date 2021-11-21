@@ -1,9 +1,9 @@
 using AutoMapper;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Queries;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
+using CSharpCourse.EmployeesService.ApplicationServices.Models.Enums;
+using CSharpCourse.EmployeesService.Domain.Models;
 using CSharpCourse.EmployeesService.Domain.Models.DTOs;
-using CSharpCourse.EmployeesService.PresentationModels.Conferences;
-using CSharpCourse.EmployeesService.PresentationModels.Employees;
 
 namespace CSharpCourse.EmployeesService.Hosting.Mapper
 {
@@ -11,39 +11,54 @@ namespace CSharpCourse.EmployeesService.Hosting.Mapper
     {
         public HostingMapperProfile()
         {
+            CreateMap<PresentationModels.Enums.ClothingSize, ClothingSize>(MemberList.Destination)
+                .ReverseMap()
+                .ValidateMemberList(MemberList.Destination);
+            CreateMap<PresentationModels.Enums.EmployeeInConferenceType, EmployeeInConferenceType>(MemberList.Destination)
+                .ReverseMap()
+                .ValidateMemberList(MemberList.Destination);
+
             CreateConference();
             GetConferences();
 
             CreateEmployee();
-            GetEmployees();
             SendToConference();
+            GetByFilter();
         }
 
         private void CreateConference()
         {
-            CreateMap<CreateConferenceInputModel, CreateConferenceCommand>(MemberList.Destination);
+            CreateMap<PresentationModels.Conferences.CreateConferenceInputModel, CreateConferenceCommand>(MemberList.Destination);
         }
 
         private void GetConferences()
         {
-            CreateMap<ConferenceDto, ConferenceViewModel>(MemberList.Destination);
-            CreateMap<ConferencesResponse, ConferencesViewModel>(MemberList.Destination);
+            CreateMap<ConferenceDto, PresentationModels.Conferences.ConferenceViewModel>(MemberList.Destination);
+            CreateMap<ConferencesResponse, PresentationModels.Conferences.ConferencesViewModel>(MemberList.Destination);
         }
 
         private void CreateEmployee()
         {
-            CreateMap<CreateEmployeeInputModel, CreateEmployeeCommand>(MemberList.Destination);
-        }
-
-        private void GetEmployees()
-        {
-            CreateMap<EmployeeDto, EmployeeViewModel>(MemberList.Destination);
-            CreateMap<EmployeesResponse, EmployeesViewModel>(MemberList.Destination);
+            CreateMap<PresentationModels.Employees.CreateEmployeeInputModel, CreateEmployeeCommand>(MemberList.Destination);
         }
 
         private void SendToConference()
         {
-            CreateMap<SendToConferenceInputModel, SendEmployeeToConferenceCommand>(MemberList.Destination);
+            CreateMap<PresentationModels.Employees.SendToConferenceInputModel, SendEmployeeToConferenceCommand>(MemberList.Destination);
+        }
+
+        public void GetByFilter()
+        {
+            CreateMap<PresentationModels.Employees.EmployeesByFilterInputModel, GetEmployeesByFilterQuery>(MemberList
+                .Destination);
+            CreateMap<GetEmployeesByFilterQueryResponse, PresentationModels.Employees.EmployeesViewModel>(MemberList
+                .Destination);
+
+            CreateMap<EmployeeDto, PresentationModels.Employees.EmployeeViewModel>(MemberList.Destination);
+
+            CreateMap<PresentationModels.PaginationFilter, PaginationFilter>(MemberList.Destination)
+                .ReverseMap()
+                .ValidateMemberList(MemberList.Destination);
         }
     }
 }

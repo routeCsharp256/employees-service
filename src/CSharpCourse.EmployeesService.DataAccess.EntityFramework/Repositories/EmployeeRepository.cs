@@ -1,43 +1,95 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
-using CSharpCourse.EmployeesService.Domain.Models.Entities;
 using CSharpCourse.EmployeesService.DataAccess.DbContexts;
+using CSharpCourse.EmployeesService.DataAccess.PredicateBuilders;
+using CSharpCourse.EmployeesService.DataAccess.PredicateBuilders.Base;
+using CSharpCourse.EmployeesService.Domain.AggregationModels.Employee;
+using CSharpCourse.EmployeesService.Domain.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace CSharpCourse.EmployeesService.DataAccess.Repositories
 {
-    public class EmployeeRepository : BaseRepository<Employee, long>, IEmployeeRepository
+    public class EmployeeRepository : Repository<CSharpCourse.EmployeesService.Domain.Models.Entities.Employee,
+        long>, IEmployeeRepository
     {
-        public EmployeeRepository(EmployeesDbContext dbContext) : base(dbContext)
+        private readonly IFactory<IEmployeeFilterPredicateBuilder> _filterFactory;
+
+        public EmployeeRepository(EmployeesDbContext dbContext,
+            IFactory<IEmployeeFilterPredicateBuilder> filterFactory) : base(dbContext)
         {
+            _filterFactory = filterFactory;
         }
 
-        public override Task<List<Employee>> GetAllAsync(CancellationToken cancellationToken = default)
+        public override Task<List<CSharpCourse.EmployeesService.Domain.Models.Entities.Employee>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking
                 .Where(it => !it.IsFired)
                 .ToListAsync(cancellationToken);
         }
 
-        public override Task<Employee> GetByIdAsync(long id, CancellationToken cancellationToken = default)
+        public override Task<CSharpCourse.EmployeesService.Domain.Models.Entities.Employee> GetByIdAsync(long id, CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking
-                .FirstOrDefaultAsync(it => it.Id.Equals(id) && !it.IsFired,
+                .FirstOrDefaultAsync(it => it.Id.Equals(id),
                     cancellationToken);
         }
 
-        public override Task<List<Employee>> GetByIdsAsync(IReadOnlyCollection<long> ids, CancellationToken cancellationToken = default)
+        public override Task<List<CSharpCourse.EmployeesService.Domain.Models.Entities.Employee>> GetByIdsAsync(IReadOnlyCollection<long> ids, CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking
                 .Where(it => ids.Contains(it.Id) && !it.IsFired)
                 .ToListAsync(cancellationToken);
         }
 
-        public Task<List<Employee>> GetAllWithIncludesAsync(CancellationToken cancellationToken = default)
+        public Task<CSharpCourse.EmployeesService.Domain.Models.Entities.Employee> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+        {
+            return DbSetNoTracking
+                .FirstOrDefaultAsync(it => it.Email.Equals(email),
+                    cancellationToken);
+        }
+
+        public async Task<FilteredEmployeesWithTotalCountDto> GetByFilter(EmployeesFilterDto filter, CancellationToken cancellationToken = default)
+        {
+            var predicateBuilder = _filterFactory
+                .Create();
+
+            if (filter.FiredDate is not null)
+                predicateBuilder.FilterByFiredDates(filter);
+
+            if (filter.HiringDate is not null)
+                predicateBuilder.FilterByHiringDates(filter);
+
+            if (filter.ColumnKeywords is not null && filter.ColumnKeywords.Any())
+                predicateBuilder.FilterByKeywords(filter);
+
+            predicateBuilder.FilterByStatus(filter);
+
+            var builder = predicateBuilder.Build();
+            var query = DbSetNoTracking
+                .Where(builder);
+
+            var totalCountResponse = query.CountAsync(cancellationToken);
+
+            //Sorting
+            query = query
+                .OrderByDescending(x => x.HiringDate);
+
+            //Paging
+            query = query
+                .Skip((filter.Paging.Page - 1) * filter.Paging.ItemsOnPage)
+                .Take(filter.Paging.ItemsOnPage);
+
+            return new FilteredEmployeesWithTotalCountDto
+            {
+                TotalCount = await totalCountResponse,
+                Items = await query.ToListAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            };
+        }
+
+        public Task<List<CSharpCourse.EmployeesService.Domain.Models.Entities.Employee>> GetAllWithIncludesAsync(CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking
                 .Include(it => it.Conferences)
@@ -45,14 +97,14 @@ namespace CSharpCourse.EmployeesService.DataAccess.Repositories
                 .ToListAsync(cancellationToken);
         }
 
-        public Task<Employee> GetByIdWithIncludesAsync(long id, CancellationToken cancellationToken = default)
+        public Task<CSharpCourse.EmployeesService.Domain.Models.Entities.Employee> GetByIdWithIncludesAsync(long id, CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking
                 .Include(it => it.Conferences)
                 .FirstOrDefaultAsync(it => it.Id.Equals(id) && !it.IsFired, cancellationToken);
         }
 
-        public Task<List<Employee>> GetByIdsWithIncludesAsync(IReadOnlyCollection<long> ids,
+        public Task<List<CSharpCourse.EmployeesService.Domain.Models.Entities.Employee>> GetByIdsWithIncludesAsync(IReadOnlyCollection<long> ids,
             CancellationToken cancellationToken = default)
         {
             return DbSetNoTracking
@@ -67,30 +119,6 @@ namespace CSharpCourse.EmployeesService.DataAccess.Repositories
                 .Where(it => it.Id.Equals(id) && !it.IsFired)
                 .SelectMany(it => it.Conferences.Select(c => c.Id))
                 .ToListAsync(cancellationToken);
-        }
-
-        public async Task DismissAsync(long id, CancellationToken cancellationToken = default)
-        {
-            var employee = await DbSetNoTracking
-                .FirstOrDefaultAsync(it => it.Id.Equals(id) && !it.IsFired,
-                    cancellationToken);
-            if (employee is null)
-                throw new Exception($"Employee with id {id} not found or is already fired");
-
-            employee.IsFired = true;
-            employee.FiredDate = DateTime.UtcNow;
-
-            Context.Update(employee);
-            await Context.SaveChangesAsync(cancellationToken);
-        }
-
-        public async Task DismissAsync(Employee employee, CancellationToken cancellationToken = default)
-        {
-            employee.IsFired = true;
-            employee.FiredDate = DateTime.UtcNow;
-
-            Context.Update(employee);
-            await Context.SaveChangesAsync(cancellationToken);
         }
     }
 }

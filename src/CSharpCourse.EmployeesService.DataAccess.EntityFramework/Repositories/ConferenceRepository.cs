@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
 using CSharpCourse.EmployeesService.Domain.Models.Entities;
 using CSharpCourse.EmployeesService.DataAccess.DbContexts;
+using CSharpCourse.EmployeesService.Domain.AggregationModels.Conference;
 using Microsoft.EntityFrameworkCore;
 
 namespace CSharpCourse.EmployeesService.DataAccess.Repositories
 {
-    public class ConferenceRepository : BaseRepository<Conference, long>, IConferenceRepository
+    public class ConferenceRepository : Repository<Conference, long>, IConferenceRepository
     {
         public ConferenceRepository(EmployeesDbContext dbContext) : base(dbContext)
         {

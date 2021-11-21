@@ -1,4 +1,4 @@
-﻿using CSharpCourse.MerchandiseApi.Domain.Root;
+﻿using CSharpCourse.EmployeesService.Domain.Root;
 
 namespace CSharpCourse.EmployeesService.Domain.AggregationModels.Employee
 {

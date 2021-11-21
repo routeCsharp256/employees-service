@@ -8,9 +8,10 @@ using Confluent.Kafka;
 using CSharpCourse.Core.Lib.Enums;
 using CSharpCourse.Core.Lib.Events;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
-using CSharpCourse.EmployeesService.ApplicationServices.Models;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
-using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
+using CSharpCourse.EmployeesService.ApplicationServices.Models.Enums;
+using CSharpCourse.EmployeesService.Domain.AggregationModels.Conference;
+using CSharpCourse.EmployeesService.Domain.AggregationModels.Employee;
 using MediatR;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
@@ -69,8 +70,8 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                         {
                             MerchType = request.AsWhom switch
                             {
-                                EmployeeInConferenceType.AsListener => MerchType.ConferenceListenerPack,
-                                EmployeeInConferenceType.AsSpeaker => MerchType.ConferenceSpeakerPack,
+                                (int)EmployeeInConferenceType.AsListener => MerchType.ConferenceListenerPack,
+                                (int)EmployeeInConferenceType.AsSpeaker => MerchType.ConferenceSpeakerPack,
                                 _ => throw new Exception("Merch type not defined")
                             }
                         }

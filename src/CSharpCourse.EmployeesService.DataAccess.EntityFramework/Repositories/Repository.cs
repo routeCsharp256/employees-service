@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CSharpCourse.EmployeesService.Domain.Contracts.Repositories;
 using CSharpCourse.EmployeesService.Domain.Models;
 using CSharpCourse.EmployeesService.DataAccess.DbContexts;
+using CSharpCourse.EmployeesService.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace CSharpCourse.EmployeesService.DataAccess.Repositories
 {
-    public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey>
+    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : class, IIdModel<TKey>
         where TKey : IEquatable<TKey>
     {
@@ -18,30 +18,32 @@ namespace CSharpCourse.EmployeesService.DataAccess.Repositories
         protected readonly DbSet<TEntity> DbSet;
         protected readonly IQueryable<TEntity> DbSetNoTracking;
 
-        protected BaseRepository(EmployeesDbContext dbContext)
+        protected Repository(EmployeesDbContext dbContext)
         {
             Context = dbContext;
             DbSet = dbContext.Set<TEntity>();
             DbSetNoTracking = DbSet.AsNoTracking();
         }
 
-        public virtual async Task<TKey> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual Task<TKey> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            DbSet.Add(entity);
-            await Context.SaveChangesAsync(cancellationToken);
-            return entity.Id;
+            var added = DbSet.Add(entity);
+
+            return Task.FromResult(added.Entity.Id);
         }
 
-        public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             Context.Update(entity);
-            await Context.SaveChangesAsync(cancellationToken);
+
+            return Task.CompletedTask;
         }
 
-        public async Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             Context.Remove(entity);
-            await Context.SaveChangesAsync(cancellationToken);
+
+            return Task.CompletedTask;
         }
 
         public virtual Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)

@@ -4,9 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using CSharpCourse.EmployeesService.Domain.Models;
 
-namespace CSharpCourse.EmployeesService.Domain.Contracts.Repositories
+namespace CSharpCourse.EmployeesService.Domain.Contracts
 {
-    public interface IBaseRepository<TEntity, TKey>
+    public interface IRepository<TEntity, TKey>
         where TEntity : class, IIdModel<TKey>
         where TKey : IEquatable<TKey>
     {
