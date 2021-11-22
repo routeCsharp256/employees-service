@@ -79,7 +79,8 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                                 (int)EmployeeInConferenceType.AsListener => MerchType.ConferenceListenerPack,
                                 (int)EmployeeInConferenceType.AsSpeaker => MerchType.ConferenceSpeakerPack,
                                 _ => throw new Exception("Merch type not defined")
-                            }
+                            },
+                            ClothingSize = (Core.Lib.Enums.ClothingSize)emp.ClothingSize
                         }
                     })
                 }, cancellationToken);

@@ -66,7 +66,8 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                         EventType = EmployeeEventType.Hiring,
                         Payload = new MerchDeliveryEventPayload()
                         {
-                            MerchType = MerchType.WelcomePack
+                            MerchType = MerchType.WelcomePack,
+                            ClothingSize = (ClothingSize)dto.ClothingSize
                         }
                     })
                 }, cancellationToken);
