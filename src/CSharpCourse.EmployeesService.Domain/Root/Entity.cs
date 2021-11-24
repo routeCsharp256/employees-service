@@ -4,11 +4,12 @@ using MediatR;
 
 namespace CSharpCourse.EmployeesService.Domain.Root
 {
-    public abstract class Entity
+    public abstract class Entity<TKey>
+        where TKey : IEquatable<TKey>
     {
         private int? _requestedHashCode;
 
-        public virtual long Id { get; protected set; }
+        public virtual TKey Id { get; protected set; }
 
         private readonly List<INotification> _domainEvents = new();
 
@@ -25,11 +26,11 @@ namespace CSharpCourse.EmployeesService.Domain.Root
             => _domainEvents.Clear();
 
         public bool IsTransient()
-            => Id == default;
+            => Id.Equals(default(TKey));
 
         public override bool Equals(object obj)
         {
-            if (obj is not Entity entity)
+            if (obj is not Entity<TKey> entity)
                 return false;
 
             if (ReferenceEquals(this, entity))
@@ -41,7 +42,7 @@ namespace CSharpCourse.EmployeesService.Domain.Root
             if (entity.IsTransient() || IsTransient())
                 return false;
             else
-                return entity.Id == Id;
+                return entity.Id.Equals(Id);
         }
 
         public override int GetHashCode()
@@ -56,12 +57,12 @@ namespace CSharpCourse.EmployeesService.Domain.Root
                 return base.GetHashCode();
 
         }
-        public static bool operator ==(Entity left, Entity right)
+        public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
         {
             return left?.Equals(right) ?? object.Equals(right, null);
         }
 
-        public static bool operator !=(Entity left, Entity right)
+        public static bool operator !=(Entity<TKey> left, Entity<TKey> right)
         {
             return !(left == right);
         }

@@ -7,9 +7,11 @@ using AutoMapper;
 using Confluent.Kafka;
 using CSharpCourse.Core.Lib.Enums;
 using CSharpCourse.Core.Lib.Events;
+using CSharpCourse.EmployeesService.ApplicationServices.Exceptions;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Enums;
+using CSharpCourse.EmployeesService.Domain.AggregationModels;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Conference;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Employee;
 using CSharpCourse.EmployeesService.Domain.Contracts;
@@ -43,23 +45,24 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
             // Проверить что сотрудник существует
             var emp = await _employeeRepository.GetByIdWithIncludesAsync(request.EmployeeId, cancellationToken);
             if (emp is null)
-                throw new Exception($"Employee with id {request.EmployeeId} not found in store");
+                throw new BusinessException($"Employee with id {request.EmployeeId} not found in store");
 
             // Проверить что конференция еще не прошла
             var conf = await _conferenceRepository.CheckIsConferenceIsNotEndAsync(request.ConferenceId,
                 cancellationToken);
             if (conf is null)
-                throw new Exception($"Conference with id {request.ConferenceId} not found or is end");
+                throw new BusinessException($"Conference with id {request.ConferenceId} not found or is end");
 
             // Проверить что данный сотрудник еще не был на этой конференции
-            if (emp.Conferences.Select(it => it.Id).Contains(request.EmployeeId))
-                throw new Exception($"Employee with id {request.EmployeeId} was registered in " +
-                                    $"conference with id {request.ConferenceId}");
+            if (emp.EmployeeConferences.Select(it => it.Conference.Id).Contains(request.EmployeeId))
+                throw new BusinessException($"Employee with id {request.EmployeeId} was registered in " +
+                                            $"conference with id {request.ConferenceId}");
 
             await _unitOfWork.StartTransaction(cancellationToken);
 
             // Записать что сотрудник идет на коференцию
-            emp.Conferences.Add(conf);
+            emp.EmployeeConferences.Add(new EmployeeConference()
+                { ConferenceId = conf.Id, EmployeeId = request.EmployeeId });
             await _employeeRepository.UpdateAsync(emp, cancellationToken);
 
             // Отправить запрос на выдачу мерча

@@ -17,26 +17,28 @@ namespace CSharpCourse.EmployeesService.DataAccess.Repositories
 
         }
 
-        public Task<List<Conference>> GetAllWithIncludesAsync(CancellationToken cancellationToken = default)
+        public Task<List<Conference>> GetAllWithIncludesAsync(CancellationToken cancellationToken)
         {
             return DbSetNoTracking
-                .Include(it => it.Employees)
+                .Include(it => it.EmployeeConferences)
+                .ThenInclude(it => it.Employee)
                 .ToListAsync(cancellationToken);
         }
 
         public Task<List<Conference>> GetByIdsWithIncludesAsync(IReadOnlyCollection<long> ids,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken)
         {
             return DbSetNoTracking
-                .Include(it => it.Employees)
+                .Include(it => it.EmployeeConferences)
+                .ThenInclude(it => it.Employee)
                 .Where(it => ids.Contains(it.Id))
                 .ToListAsync(cancellationToken);
         }
 
-        public Task<Conference> CheckIsConferenceIsNotEndAsync(long id, CancellationToken cancellationToken = default)
+        public Task<Conference> CheckIsConferenceIsNotEndAsync(long id, CancellationToken cancellationToken)
         {
             return DbSetNoTracking
-                .FirstOrDefaultAsync(it => it.Id == id && it.Date > DateTime.Now, cancellationToken);
+                .FirstOrDefaultAsync(it => it.Id == id && it.ConferenceDate.Value > DateTime.Now, cancellationToken);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CSharpCourse.EmployeesService.Domain.AggregationModels.Employee
     /// </summary>
     public interface IEmployeeRepository : IRepository<Models.Entities.Employee, long>
     {
-        Task<List<Models.Entities.Employee>> GetAllWithIncludesAsync(CancellationToken cancellationToken = default);
+        Task<List<Models.Entities.Employee>> GetAllWithIncludesAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить данные сотрудника по идентификатору
@@ -20,7 +20,7 @@ namespace CSharpCourse.EmployeesService.Domain.AggregationModels.Employee
         /// <param name="cancellationToken">Токен для отмены операции</param>
         /// <returns>Информация о сотруднике</returns>
         Task<Models.Entities.Employee> GetByIdWithIncludesAsync(long id,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить список сотрудников по идентификаторам
@@ -29,13 +29,13 @@ namespace CSharpCourse.EmployeesService.Domain.AggregationModels.Employee
         /// <param name="cancellationToken">Токен для отмены операции</param>
         /// <returns>Список сотрудников</returns>
         Task<List<Models.Entities.Employee>> GetByIdsWithIncludesAsync(IReadOnlyCollection<long> ids,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken);
 
-        Task<List<long>> GetConferenceIdsAsync(long id, CancellationToken cancellationToken = default);
+        Task<List<long>> GetConferenceIdsAsync(long id, CancellationToken cancellationToken);
 
-        public Task<Models.Entities.Employee> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
+        public Task<Models.Entities.Employee> GetByEmailAsync(string email, CancellationToken cancellationToken);
 
         public Task<FilteredEmployeesWithTotalCountDto> GetByFilter(EmployeesFilterDto filter,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken);
     }
 }

@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using CSharpCourse.EmployeesService.DataAccess.DbContexts.ModelsConfigurations;
+using CSharpCourse.EmployeesService.Domain.AggregationModels;
+using CSharpCourse.EmployeesService.Domain.AggregationModels.Conference;
 using CSharpCourse.EmployeesService.Domain.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -15,9 +18,13 @@ namespace CSharpCourse.EmployeesService.DataAccess.DbContexts
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Conference> Conferences { get; set; }
+        public DbSet<EmployeeConference> EmployeeConferences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ConferenceConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeConferenceConfiguration());
+
             modelBuilder.Entity<Employee>(ent =>
             {
                 ent.ToTable("employees");
@@ -32,30 +39,6 @@ namespace CSharpCourse.EmployeesService.DataAccess.DbContexts
                 ent.Property(p => p.FiredDate).HasColumnName("fired_date");
                 ent.Property(p => p.ClothingSize).HasColumnName("clothing_size");
             });
-
-            modelBuilder.Entity<Conference>(ent =>
-            {
-                ent.ToTable("conferences");
-                ent.Property(p => p.Id).HasColumnName("id");
-                ent.Property(p => p.Name).HasColumnName("name");
-                ent.Property(p => p.CreateDate).HasColumnName("create_date");
-                ent.Property(p => p.Date).HasColumnName("date");
-                ent.Property(p => p.Description).HasColumnName("description");
-            });
-
-            modelBuilder
-                .Entity<Employee>()
-                .HasMany(p => p.Conferences)
-                .WithMany(p => p.Employees)
-                .UsingEntity<Dictionary<string, object>>(
-                    "employeesconferences",
-                    j =>
-                        j.HasOne<Conference>()
-                        .WithMany()
-                        .HasForeignKey("conferences_id"),
-                    j => j.HasOne<Employee>()
-                        .WithMany()
-                        .HasForeignKey("employees_id"));
 
             var dateTimeConverter = new ValueConverter<DateTime, DateTime>(
                 v => v.ToUniversalTime(),

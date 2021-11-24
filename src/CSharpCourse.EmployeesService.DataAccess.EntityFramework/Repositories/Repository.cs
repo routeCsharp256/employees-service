@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using CSharpCourse.EmployeesService.Domain.Models;
 using CSharpCourse.EmployeesService.DataAccess.DbContexts;
 using CSharpCourse.EmployeesService.Domain.Contracts;
+using CSharpCourse.EmployeesService.Domain.Root;
 using Microsoft.EntityFrameworkCore;
 
 namespace CSharpCourse.EmployeesService.DataAccess.Repositories
 {
     public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
-        where TEntity : class, IIdModel<TKey>
+        where TEntity : Entity<TKey>
         where TKey : IEquatable<TKey>
     {
         protected readonly EmployeesDbContext Context;
@@ -25,40 +26,40 @@ namespace CSharpCourse.EmployeesService.DataAccess.Repositories
             DbSetNoTracking = DbSet.AsNoTracking();
         }
 
-        public virtual Task<TKey> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual Task<TKey> CreateAsync(TEntity entity, CancellationToken cancellationToken)
         {
             var added = DbSet.Add(entity);
 
             return Task.FromResult(added.Entity.Id);
         }
 
-        public Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
         {
             Context.Update(entity);
 
             return Task.CompletedTask;
         }
 
-        public Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public Task DeleteAsync(TEntity entity, CancellationToken cancellationToken)
         {
             Context.Remove(entity);
 
             return Task.CompletedTask;
         }
 
-        public virtual Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken)
         {
             return DbSetNoTracking
                 .ToListAsync(cancellationToken);
         }
 
-        public virtual Task<TEntity> GetByIdAsync(TKey id, CancellationToken cancellationToken = default)
+        public virtual Task<TEntity> GetByIdAsync(TKey id, CancellationToken cancellationToken)
         {
             return DbSetNoTracking
                 .FirstOrDefaultAsync(it => it.Id.Equals(id), cancellationToken);
         }
 
-        public virtual Task<List<TEntity>> GetByIdsAsync(IReadOnlyCollection<TKey> ids, CancellationToken cancellationToken = default)
+        public virtual Task<List<TEntity>> GetByIdsAsync(IReadOnlyCollection<TKey> ids, CancellationToken cancellationToken)
         {
             return DbSetNoTracking
                 .Where(it => ids.Contains(it.Id))

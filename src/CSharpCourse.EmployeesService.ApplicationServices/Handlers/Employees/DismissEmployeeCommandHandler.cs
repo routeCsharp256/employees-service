@@ -6,6 +6,7 @@ using AutoMapper;
 using Confluent.Kafka;
 using CSharpCourse.Core.Lib.Enums;
 using CSharpCourse.Core.Lib.Events;
+using CSharpCourse.EmployeesService.ApplicationServices.Exceptions;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Employee;
@@ -37,14 +38,14 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
             // Увольняем сотрудника
             var employee = await _employeeRepository.GetByIdAsync(request.Id, cancellationToken);
             if (employee is null)
-                throw new Exception($"Employee with id {request.Id} not found");
+                throw new BusinessException($"Employee with id {request.Id} not found");
 
             if(employee.IsFired)
-                throw new Exception($"Employee with id {request.Id} already fired");
+                throw new BusinessException($"Employee with id {request.Id} already fired");
 
             await _unitOfWork.StartTransaction(cancellationToken);
 
-            employee.FiredDate = DateTime.Now;
+            employee.FiredDate = DateTime.UtcNow;
             employee.IsFired = true;
 
             await _employeeRepository.UpdateAsync(employee, cancellationToken);

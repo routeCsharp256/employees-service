@@ -5,13 +5,13 @@ using CSharpCourse.EmployeesService.Domain.Contracts;
 
 namespace CSharpCourse.EmployeesService.Domain.AggregationModels.Conference
 {
-    public interface IConferenceRepository : IRepository<Models.Entities.Conference, long>
+    public interface IConferenceRepository : IRepository<Conference, long>
     {
-        Task<List<Models.Entities.Conference>> GetAllWithIncludesAsync(CancellationToken cancellationToken = default);
+        Task<List<Conference>> GetAllWithIncludesAsync(CancellationToken cancellationToken);
 
-        Task<List<Models.Entities.Conference>> GetByIdsWithIncludesAsync(IReadOnlyCollection<long> ids,
-            CancellationToken cancellationToken = default);
+        Task<List<Conference>> GetByIdsWithIncludesAsync(IReadOnlyCollection<long> ids,
+            CancellationToken cancellationToken);
 
-        Task<Models.Entities.Conference> CheckIsConferenceIsNotEndAsync(long id, CancellationToken cancellationToken = default);
+        Task<Conference> CheckIsConferenceIsNotEndAsync(long id, CancellationToken cancellationToken);
     }
 }

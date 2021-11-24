@@ -2,7 +2,7 @@
 
 namespace CSharpCourse.EmployeesService.Domain.AggregationModels.Employee
 {
-    public class Employee : Entity
+    public class Employee : Entity<long>
     {
 
     }

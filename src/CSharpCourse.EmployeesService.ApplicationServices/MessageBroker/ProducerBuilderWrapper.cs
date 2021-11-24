@@ -22,7 +22,7 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.MessageBroker
         {
             var configValue = configuration.Value;
             if (configValue is null)
-                throw new Exception("Configuration for kafka server was not specified");
+                throw new ApplicationException("Configuration for kafka server was not specified");
 
             var producerConfig = new ProducerConfig
             {

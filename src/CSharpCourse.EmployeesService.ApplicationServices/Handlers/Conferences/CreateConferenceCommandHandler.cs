@@ -20,25 +20,27 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Conferences
         private readonly IMapper _mapper;
 
         public CreateConferenceCommandHandler(IConferenceRepository repository,
-            IMapper mapper, IUnitOfWork unitOfWork, ILogger<CreateConferenceCommandHandler> logger = null)
+            IMapper mapper, IUnitOfWork unitOfWork, ILogger<CreateConferenceCommandHandler> logger)
         {
             _conferenceRepository = repository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _logger = logger ?? NullLogger<CreateConferenceCommandHandler>.Instance;
+            _logger = logger;
         }
 
         public async Task<long> Handle(CreateConferenceCommand request, CancellationToken cancellationToken)
         {
-            var dto = _mapper.Map<Conference>(request);
-            dto.CreateDate = DateTime.UtcNow;
+            var newConference = Conference.CreateConference(request.Name,
+                DateTime.UtcNow,
+                request.Date,
+                request.Description);
 
             await _unitOfWork.StartTransaction(cancellationToken);
-            var result = await _conferenceRepository.CreateAsync(dto, cancellationToken);
+            var result = await _conferenceRepository.CreateAsync(newConference, cancellationToken);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return dto.Id;
+            return newConference.Id;
         }
     }
 }

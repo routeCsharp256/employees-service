@@ -7,6 +7,7 @@ using AutoMapper;
 using Confluent.Kafka;
 using CSharpCourse.Core.Lib.Enums;
 using CSharpCourse.Core.Lib.Events;
+using CSharpCourse.EmployeesService.ApplicationServices.Exceptions;
 using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Employee;
@@ -47,7 +48,7 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
 
             var employee = await _employeeRepository.GetByEmailAsync(request.Email, cancellationToken);
             if (employee is not null)
-                throw new Exception($"Email {request.Email} already taken");
+                throw new BusinessException($"Email {request.Email} already taken");
 
             await _unitOfWork.StartTransaction(cancellationToken);
 
