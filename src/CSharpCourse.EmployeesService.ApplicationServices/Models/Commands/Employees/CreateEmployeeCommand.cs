@@ -1,5 +1,5 @@
 using System;
-using CSharpCourse.EmployeesService.ApplicationServices.Models.Enums;
+using CSharpCourse.Core.Lib.Enums;
 using MediatR;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Models.Commands

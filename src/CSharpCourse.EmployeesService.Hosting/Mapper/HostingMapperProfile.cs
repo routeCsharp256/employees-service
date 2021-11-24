@@ -1,4 +1,5 @@
 using AutoMapper;
+using CSharpCourse.Core.Lib.Enums;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Queries;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Enums;
