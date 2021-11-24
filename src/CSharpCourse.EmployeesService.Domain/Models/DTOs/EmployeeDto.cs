@@ -39,6 +39,11 @@ namespace CSharpCourse.EmployeesService.Domain.Models.DTOs
         public DateTime HiringDate { get; set; }
 
         /// <summary>
+        /// Размер одежды
+        /// </summary>
+        public int ClothingSize { get; set; }
+
+        /// <summary>
         /// Conferences that an employee can attend
         /// </summary>
         public ICollection<ConferenceDto> Conferences { get; set; }

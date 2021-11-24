@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace EmployeesService.Migrations.Maintenance
+namespace CSharpCourse.EmployeesService.Migrations.Maintenance
 {
     [Maintenance(MigrationStage.BeforeAll)]
     public class BeforeAllMigration : ForwardOnlyMigration

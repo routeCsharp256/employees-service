@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static IServiceCollection AddCustomServices(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddEmployeesServiceDb(configuration);
+            services.AddEmployeesServiceEntityFrameworkDb(configuration);
             services.AddEmployeesRepositories();
             services.AddEmployeesApplicationServices(configuration);
 
@@ -72,11 +72,18 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static IServiceCollection AddCustomFluentMigrator(this IServiceCollection services,
             IConfiguration configuration)
         {
+            var connectionString = configuration.GetSection(nameof(DbConfiguration))
+                .Get<DbConfiguration>()
+                .ConnectionString;
+            if(string.IsNullOrWhiteSpace(connectionString))
+                connectionString = configuration
+                    .Get<DbConfiguration>()
+                    .ConnectionString;
+
             services.AddFluentMigratorCore()
                 .ConfigureRunner(rb =>
                     rb.AddPostgres11_0()
-                        .WithGlobalConnectionString(configuration.GetSection(nameof(DbConfiguration))
-                            .Get<DbConfiguration>().ConnectionString)
+                        .WithGlobalConnectionString(connectionString)
                         .ScanIn(typeof(InitialMigration).Assembly).For.Migrations()
                 );
 

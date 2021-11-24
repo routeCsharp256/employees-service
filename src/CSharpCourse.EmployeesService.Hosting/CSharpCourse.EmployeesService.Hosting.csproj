@@ -6,20 +6,25 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CSharpCourse.EmployeesService.ApplicationServices\CSharpCourse.EmployeesService.ApplicationServices.csproj" />
-    <ProjectReference Include="..\CSharpCourse.EmployeesService.DataAccess\CSharpCourse.EmployeesService.DataAccess.csproj" />
+    <ProjectReference Include="..\CSharpCourse.EmployeesService.DataAccess.EntityFramework\CSharpCourse.EmployeesService.DataAccess.EntityFramework.csproj" />
+    <ProjectReference Include="..\CSharpCourse.EmployeesService.PresentationModels\CSharpCourse.EmployeesService.PresentationModels.csproj" />
    <ProjectReference Include="..\CSharpCourse.EmployeesService.Migrations\CSharpCourse.EmployeesService.Migrations.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentMigrator.Runner" Version="3.3.1" />
     <PackageReference Include="FluentMigrator.Runner.Postgres" Version="3.3.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="appsettings.Development.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 using System;
+using CSharpCourse.Core.Lib.Enums;
 using MediatR;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Models.Commands
@@ -29,5 +30,8 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Models.Commands
         /// Email address
         /// </summary>
         public string Email { get; set; }
+
+        /// <inheritdoc cref="ClothingSize"/>
+        public ClothingSize ClothingSize { get; set; }
     }
 }

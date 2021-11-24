@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using CSharpCourse.EmployeesService.Domain.AggregationModels;
+using CSharpCourse.EmployeesService.Domain.AggregationModels.Conference;
+using CSharpCourse.EmployeesService.Domain.Root;
 
 namespace CSharpCourse.EmployeesService.Domain.Models.Entities
 {
     /// <summary>
     /// Employee of company
     /// </summary>
-    public class Employee : IdModel<long>
+    public class Employee : Entity<long>
     {
         /// <summary>
         /// First name
@@ -49,8 +52,10 @@ namespace CSharpCourse.EmployeesService.Domain.Models.Entities
         public DateTime? FiredDate { get; set; }
 
         /// <summary>
-        /// Conferences that an employee can attend
+        /// Размер одежды
         /// </summary>
-        public ICollection<Conference> Conferences { get; set; }
+        public int ClothingSize { get; set; }
+
+        public ICollection<EmployeeConference> EmployeeConferences { get; set; }
     }
 }

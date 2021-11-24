@@ -19,6 +19,6 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Models.Commands
         /// В качестве кого будет сотрудник отправлен, либо слушатель либо докладчик
         /// </summary>
         /// <value></value>
-        public EmployeeInConferenceType AsWhom { get; set; }
+        public int AsWhom { get; set; }
     }
 }

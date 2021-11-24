@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Exteca.Core.Hosting.Extensions;
+using CSharpCourse.EmployeesService.Hosting.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 

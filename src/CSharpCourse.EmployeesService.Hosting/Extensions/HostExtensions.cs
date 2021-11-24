@@ -5,7 +5,7 @@ using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Exteca.Core.Hosting.Extensions
+namespace CSharpCourse.EmployeesService.Hosting.Extensions
 {
     public static class HostExtensions
     {
