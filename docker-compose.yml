@@ -8,6 +8,9 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "8443:80"
+    environment:
+      ConnectionString: "Host=host.docker.internal;Port=5425;Database=employees-service;Username=postgres;Password=postgres;"
+      BootstrapServers: "broker:29092"
     depends_on:
       - employees-service-postgres-db
       - zookeeper
