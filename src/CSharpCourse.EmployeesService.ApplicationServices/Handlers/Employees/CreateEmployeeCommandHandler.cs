@@ -12,6 +12,7 @@ using CSharpCourse.EmployeesService.ApplicationServices.MessageBroker;
 using CSharpCourse.EmployeesService.ApplicationServices.Models.Commands;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Employee;
 using CSharpCourse.EmployeesService.Domain.Contracts;
+using CSharpCourse.EmployeesService.Domain.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Employee = CSharpCourse.EmployeesService.Domain.Models.Entities.Employee;
@@ -55,6 +56,10 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
             // Создаем сотрудника
             var employeeId = await _employeeRepository.CreateAsync(dto, cancellationToken);
 
+            var random = new Random();
+            var randomManager = Constants
+                .ManagersIssuingMerchandise[random.Next(0, Constants.ManagersIssuingMerchandise.Length)];
+
             // Отправляем заявку, что сотрудник создан, и нужно выдать мерч
             await _producerBuilderWrapper.Producer.ProduceAsync(_producerBuilderWrapper.CreateNewEmployeeTopic,
                 new Message<string, string>()
@@ -64,6 +69,8 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                     {
                         EmployeeEmail = dto.Email,
                         EmployeeName = $"{dto.LastName} {dto.FirstName} {dto.MiddleName}",
+                        ManagerEmail = randomManager.ManagerEmail,
+                        ManagerName = randomManager.ManagerName,
                         EventType = EmployeeEventType.Hiring,
                         Payload = new MerchDeliveryEventPayload()
                         {

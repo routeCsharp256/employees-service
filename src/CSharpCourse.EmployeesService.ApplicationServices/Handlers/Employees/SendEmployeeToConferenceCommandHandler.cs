@@ -15,6 +15,7 @@ using CSharpCourse.EmployeesService.Domain.AggregationModels;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Conference;
 using CSharpCourse.EmployeesService.Domain.AggregationModels.Employee;
 using CSharpCourse.EmployeesService.Domain.Contracts;
+using CSharpCourse.EmployeesService.Domain.Models;
 using MediatR;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
@@ -65,6 +66,10 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                 { ConferenceId = conf.Id, EmployeeId = request.EmployeeId });
             await _employeeRepository.UpdateAsync(emp, cancellationToken);
 
+            var random = new Random();
+            var randomManager = Constants
+                .ManagersIssuingMerchandise[random.Next(0, Constants.ManagersIssuingMerchandise.Length)];
+
             // Отправить запрос на выдачу мерча
             await _producerBuilderWrapper.Producer.ProduceAsync(_producerBuilderWrapper.MoveToConferenceTopic,
                 new Message<string, string>()
@@ -74,6 +79,8 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.Handlers.Employees
                     {
                         EmployeeEmail = emp.Email,
                         EmployeeName = $"{emp.LastName} {emp.FirstName} {emp.MiddleName}",
+                        ManagerEmail = randomManager.ManagerEmail,
+                        ManagerName = randomManager.ManagerName,
                         EventType = EmployeeEventType.ConferenceAttendance,
                         Payload = new MerchDeliveryEventPayload()
                         {

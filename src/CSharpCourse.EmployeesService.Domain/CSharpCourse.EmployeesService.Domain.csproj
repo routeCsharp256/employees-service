@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="AggregationModels\Employee" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
