@@ -26,7 +26,7 @@ namespace CSharpCourse.EmployeesService.ApplicationServices.MessageBroker
 
             var producerConfig = new ProducerConfig
             {
-                BootstrapServers = configValue.BootstrapServer
+                BootstrapServers = configValue.BootstrapServers
             };
 
             Producer = new ProducerBuilder<string, string>(producerConfig).Build();

@@ -5,7 +5,7 @@
         /// <summary>
         /// Collection of bootstrap service
         /// </summary>
-        public string BootstrapServer { get; set; }
+        public string BootstrapServers { get; set; }
 
         /// <summary>
         /// Topic for create new employee event
