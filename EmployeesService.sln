@@ -24,6 +24,7 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 	docker-compose.yml = docker-compose.yml
 	Dockerfile = Dockerfile
+	entrypoint.sh = entrypoint.sh
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCourse.EmployeesService.PresentationModels", "src\CSharpCourse.EmployeesService.PresentationModels\CSharpCourse.EmployeesService.PresentationModels.csproj", "{CD282DD9-397D-42A9-927D-FE53BD70678E}"

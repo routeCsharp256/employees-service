@@ -7,26 +7,28 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["./Directory.build.props", "./"]
 COPY ["./Directory.build.targets", "./"]
-COPY ["./src/CSharpCourse.EmployeesService.Domain/CSharpCourse.EmployeesService.Domain.csproj", "./EmployeesService.Domain/"]
-COPY ["./src/CSharpCourse.EmployeesService.ApplicationServices/CSharpCourse.EmployeesService.ApplicationServices.csproj", "./EmployeesService.ApplicationServices/"]
-COPY ["./src/CSharpCourse.EmployeesService.DataAccess.EntityFramework/CSharpCourse.EmployeesService.DataAccess.EntityFramework.csproj", "./EmployeesService.DataAccess.EntityFramework/"]
-COPY ["./src/CSharpCourse.EmployeesService.DataAccess.Dapper/CSharpCourse.EmployeesService.DataAccess.Dapper.csproj", "./EmployeesService.DataAccess.Dapper/"]
-COPY ["./src/CSharpCourse.EmployeesService.PresentationModels/CSharpCourse.EmployeesService.PresentationModels.csproj", "./EmployeesService.PresentationModels/"]
-COPY ["./src/CSharpCourse.EmployeesService.Migrations/CSharpCourse.EmployeesService.Migrations.csproj", "./EmployeesService.Migrations/"]
-COPY ["./src/CSharpCourse.EmployeesService.Hosting/CSharpCourse.EmployeesService.Hosting.csproj", "./EmployeesService.Hosting/"]
-RUN dotnet restore "./EmployeesService.Hosting/CSharpCourse.EmployeesService.Hosting.csproj"
+COPY ["./src/CSharpCourse.EmployeesService.Domain/CSharpCourse.EmployeesService.Domain.csproj", "./CSharpCourse.EmployeesService.Domain/"]
+COPY ["./src/CSharpCourse.EmployeesService.ApplicationServices/CSharpCourse.EmployeesService.ApplicationServices.csproj", "./CSharpCourse.EmployeesService.ApplicationServices/"]
+COPY ["./src/CSharpCourse.EmployeesService.DataAccess.EntityFramework/CSharpCourse.EmployeesService.DataAccess.EntityFramework.csproj", "./CSharpCourse.EmployeesService.DataAccess.EntityFramework/"]
+COPY ["./src/CSharpCourse.EmployeesService.DataAccess.Dapper/CSharpCourse.EmployeesService.DataAccess.Dapper.csproj", "./CSharpCourse.EmployeesService.DataAccess.Dapper/"]
+COPY ["./src/CSharpCourse.EmployeesService.PresentationModels/CSharpCourse.EmployeesService.PresentationModels.csproj", "./CSharpCourse.EmployeesService.PresentationModels/"]
+COPY ["./src/CSharpCourse.EmployeesService.Migrations/CSharpCourse.EmployeesService.Migrations.csproj", "./CSharpCourse.EmployeesService.Migrations/"]
+COPY ["./src/CSharpCourse.EmployeesService.Hosting/CSharpCourse.EmployeesService.Hosting.csproj", "./CSharpCourse.EmployeesService.Hosting/"]
+RUN dotnet restore "./CSharpCourse.EmployeesService.Hosting/CSharpCourse.EmployeesService.Hosting.csproj"
 
 COPY "./Directory.build.props" .
 COPY "./Directory.build.targets" .
 COPY "./src" .
-WORKDIR "/src/CSharpCourse.EmployeesService.Hosting/."
+WORKDIR "/src"
 
-RUN dotnet build "CSharpCourse.EmployeesService.Hosting.csproj" -c Release -o /app/build
+RUN dotnet build "CSharpCourse.EmployeesService.Hosting/CSharpCourse.EmployeesService.Hosting.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "CSharpCourse.EmployeesService.Hosting.csproj" -c Release -o /app/publish
+RUN dotnet publish "CSharpCourse.EmployeesService.Hosting/CSharpCourse.EmployeesService.Hosting.csproj" -c Release -o /app/publish
+COPY "entrypoint.sh" "/app/publish/."
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CSharpCourse.EmployeesService.Hosting.dll"]
+RUN chmod +x entrypoint.sh
+CMD /bin/bash entrypoint.sh
