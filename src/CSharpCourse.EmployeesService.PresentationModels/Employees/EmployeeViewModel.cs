@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using CSharpCourse.EmployeesService.PresentationModels.Conferences;
 using CSharpCourse.EmployeesService.PresentationModels.Enums;
 
 namespace CSharpCourse.EmployeesService.PresentationModels.Employees
@@ -25,5 +27,10 @@ namespace CSharpCourse.EmployeesService.PresentationModels.Employees
 
         /// <inheritdoc cref="ClothingSize"/>
         public ClothingSize ClothingSize { get; set; }
+
+        /// <summary>
+        /// Список конференций на которые был записан сотрудник
+        /// </summary>
+        public IReadOnlyCollection<ConferenceViewModel> Conferences { get; set; }
     }
 }

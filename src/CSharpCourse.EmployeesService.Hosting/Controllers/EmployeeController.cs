@@ -51,6 +51,25 @@ namespace CSharpCourse.EmployeesService.Hosting.Controllers
                 cancellationToken));
         }
 
+        [HttpGet("{id}")]
+        public async Task<EmployeeViewModel> GetByIdAsync([FromRoute] long id, CancellationToken cancellationToken)
+        {
+            return _mapper.Map<EmployeeViewModel>(await _mediator.Send(new GetEmployeeByIdQuery() { Id = id },
+                cancellationToken));
+        }
+
+        [HttpGet()]
+        public async Task<EmployeesViewModel> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var allElements = await _mediator.Send(new GetAllEmployeesQuery(), cancellationToken);
+
+            return new EmployeesViewModel()
+            {
+                Items = _mapper.Map<EmployeeViewModel[]>(allElements.Items),
+                TotalCount = allElements.Items.Count
+            };
+        }
+
         [HttpPost("toconference")]
         public async Task SendToConference([FromBody] SendToConferenceInputModel value,
             CancellationToken cancellationToken)

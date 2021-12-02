@@ -78,6 +78,8 @@ namespace CSharpCourse.EmployeesService.DataAccess.Repositories
 
             //Paging
             query = query
+                .Include(it => it.EmployeeConferences)
+                .ThenInclude(it => it.Conference)
                 .Skip((filter.Paging.Page - 1) * filter.Paging.ItemsOnPage)
                 .Take(filter.Paging.ItemsOnPage);
 

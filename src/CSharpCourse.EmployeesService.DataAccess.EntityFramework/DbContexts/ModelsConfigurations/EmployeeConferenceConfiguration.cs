@@ -8,6 +8,8 @@ namespace CSharpCourse.EmployeesService.DataAccess.DbContexts.ModelsConfiguratio
     {
         public void Configure(EntityTypeBuilder<EmployeeConference> builder)
         {
+            builder.ToTable("employeesconferences");
+
             builder.Property(p => p.ConferenceId).HasColumnName("conferences_id");
             builder.Property(p => p.EmployeeId).HasColumnName("employees_id");
 

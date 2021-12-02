@@ -1,15 +1,10 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CSharpCourse.EmployeesService.Domain.Models.DTOs;
 
 namespace CSharpCourse.EmployeesService.ApplicationServices.Models.Queries
 {
-    public class GetEmployeesByFilterQueryResponse
+    public class GetAllEmployeesQueryResponse
     {
-        /// <summary>
-        ///     Total count
-        /// </summary>
-        public int TotalCount { get; set; }
-
         /// <summary>
         ///     Founded Employees
         /// </summary>
